@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="周彦君（小猪）的个人主页：互联网金融运营人，正在学习成为 Vibe Coder。">
+  <title>周彦君 · 小猪</title>
+  <style>
+    :root {
+      --paper: #fbf7ef;
+      --paper-deep: #f2eadb;
+      --ink: #302820;
+      --muted: #7b6b5d;
+      --line: rgba(65, 49, 36, .14);
+      --amber: #d98941;
+      --cream: #ffe0a6;
+      --green: #9aaa87;
+      --rose: #e8aaa3;
+      --blue: #7f9ba8;
+      --shadow: 0 18px 55px rgba(53, 38, 24, .12);
+      --radius: 8px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        repeating-linear-gradient(90deg, rgba(81, 58, 31, .025) 0, rgba(81, 58, 31, .025) 1px, transparent 1px, transparent 7px),
+        linear-gradient(180deg, var(--paper), #fffaf3 48%, #f6efe3);
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    .page { overflow: hidden; }
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      max-width: calc(100vw - 36px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251, 247, 239, .82);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .seal {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(137, 71, 40, .26);
+      background: #fff7ea;
+      color: #a44f35;
+      font-size: 14px;
+      border-radius: 6px;
+      box-shadow: 0 7px 20px rgba(122, 66, 28, .08);
+    }
+    .navlinks {
+      display: none;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .navlinks a {
+      padding: 9px 10px;
+      border-radius: 999px;
+    }
+    .navlinks a:hover { background: rgba(217, 137, 65, .13); color: var(--ink); }
+
+    .hero {
+      min-height: calc(100svh - 116px);
+      display: grid;
+      align-items: center;
+      padding: 30px 0 38px;
+    }
+    .hero-grid {
+      display: grid;
+      gap: 26px;
+      min-width: 0;
+    }
+    .hero-copy { min-width: 0; }
+    .eyebrow {
+      width: fit-content;
+      color: #8b5b34;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      background: rgba(255, 224, 166, .56);
+      border: 1px solid rgba(217, 137, 65, .22);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+    h1 {
+      margin: 15px 0 0;
+      font-size: clamp(39px, 11vw, 86px);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    .hero-subtitle {
+      min-height: 68px;
+      margin: 18px 0 0;
+      color: #4d4035;
+      font-size: clamp(17px, 4.8vw, 25px);
+      line-height: 1.65;
+      font-weight: 650;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    .cursor { color: var(--amber); animation: blink .9s steps(2, start) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .intro {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+      max-width: 330px;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    .tags {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin-top: 22px;
+      width: min(100%, 260px);
+      max-width: 100%;
+    }
+    .tag {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .45);
+      color: #5c4d40;
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 13px;
+      text-align: center;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff8ec;
+      box-shadow: 0 8px 20px rgba(63, 42, 24, .06);
+      cursor: pointer;
+    }
+    .btn.primary {
+      color: #231911;
+      background: var(--cream);
+      border-color: rgba(217, 137, 65, .34);
+      font-weight: 760;
+    }
+    .portrait-stage {
+      position: relative;
+      width: 100%;
+      max-width: 342px;
+      min-width: 0;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+    }
+    .portrait-card {
+      position: relative;
+      aspect-ratio: 4 / 5.25;
+      overflow: hidden;
+      border: 1px solid rgba(65, 49, 36, .12);
+      border-radius: var(--radius);
+      background: #efe2d0;
+      box-shadow: var(--shadow);
+      transform: translate3d(0, 0, 0);
+      transition: transform .35s ease;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 66% center;
+      transition: opacity .28s ease, transform .55s ease;
+    }
+    .portrait-card:hover img { transform: scale(1.035); }
+    .portrait-note {
+      position: absolute;
+      right: -10px;
+      bottom: 24px;
+      max-width: 154px;
+      padding: 11px 12px;
+      background: rgba(255, 250, 240, .92);
+      border: 1px solid rgba(65, 49, 36, .13);
+      border-radius: 6px;
+      color: #6a594c;
+      font-size: 12px;
+      line-height: 1.55;
+      box-shadow: 0 13px 32px rgba(52, 34, 21, .1);
+      transform: rotate(2deg);
+    }
+    .photo-switch {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 7px;
+      z-index: 2;
+    }
+    .dot {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, .76);
+      border-radius: 50%;
+      background: rgba(39, 31, 25, .3);
+      cursor: pointer;
+    }
+    .dot.active { background: var(--cream); }
+
+    section { padding: 54px 0; }
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      color: #9a623a;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(27px, 8vw, 44px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 15px;
+    }
+    .contact-email {
+      margin: -10px 0 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .contact-email a {
+      color: #8b5b34;
+      font-weight: 760;
+      border-bottom: 1px solid rgba(139, 91, 52, .28);
+    }
+    .about-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .28);
+    }
+    .about-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .quote {
+      margin: 0;
+      font-size: clamp(23px, 6.8vw, 42px);
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .quote mark {
+      background: linear-gradient(transparent 57%, rgba(255, 224, 166, .85) 57%);
+      color: inherit;
+    }
+
+    .experience-grid,
+    .work-grid,
+    .social-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .experience-card,
+    .work-card,
+    .social-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 252, 246, .72);
+      box-shadow: 0 12px 34px rgba(64, 41, 22, .07);
+    }
+    .experience-card {
+      width: 100%;
+      min-height: 205px;
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .experience-card:hover,
+    .work-card:hover,
+    .social-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 46px rgba(64, 41, 22, .1);
+    }
+    .experience-card,
+    .work-card,
+    .social-card { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-num {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .experience-card h3,
+    .work-card h3,
+    .social-card h3 {
+      margin: 12px 0 6px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .inline-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 8px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(154, 170, 135, .18);
+      color: #667251;
+      font-size: 12px;
+      font-weight: 760;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .role {
+      color: #9b6d43;
+      font-weight: 720;
+      font-size: 14px;
+    }
+    .card-text {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .doing {
+      background: #fffaf2;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .doing-grid {
+      display: grid;
+      gap: 15px;
+    }
+    .doing-item {
+      min-height: 160px;
+      padding: 20px;
+      border-left: 4px solid var(--amber);
+      background: rgba(255, 255, 255, .55);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 12px 30px rgba(63, 42, 24, .06);
+    }
+    .doing-item:nth-child(2) { border-left-color: var(--green); }
+    .doing-item h3 { margin: 0 0 10px; font-size: 21px; }
+    .doing-item p { margin: 0; color: var(--muted); line-height: 1.85; }
+
+    .life-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(252px, 82%);
+      gap: 14px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding: 3px 4px 18px;
+      margin: 0 -4px;
+    }
+    .life-strip::-webkit-scrollbar { height: 8px; }
+    .life-strip::-webkit-scrollbar-thumb { background: rgba(124, 92, 64, .22); border-radius: 999px; }
+    .life-card {
+      scroll-snap-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #e8decf;
+      box-shadow: var(--shadow);
+      height: 420px;
+    }
+    .life-main {
+      position: relative;
+      height: 420px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .life-main::after {
+      content: "点击切换封面图";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 999px;
+      background: rgba(38, 29, 22, .54);
+      color: #fffaf4;
+      font-size: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+      backdrop-filter: blur(10px);
+      opacity: .92;
+    }
+    .life-card.expanded .life-main::after {
+      content: "点击收起";
+      background: rgba(217, 137, 65, .74);
+    }
+    .life-main img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      transition: transform .55s ease, filter .35s ease;
+    }
+    .life-main:hover img { transform: scale(1.06); filter: saturate(1.04); }
+    .life-caption {
+      position: absolute;
+      inset: auto 12px 12px;
+      min-height: 124px;
+      padding: 14px;
+      color: #fffaf4;
+      background: rgba(38, 29, 22, .58);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 7px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .life-caption h3 { margin: 0 0 6px; font-size: 20px; }
+    .life-caption p { margin: 0; font-size: 13px; line-height: 1.65; color: rgba(255, 250, 244, .84); }
+    .life-gallery { display: none; }
+    .life-gallery-panel {
+      grid-column: 1 / -1;
+      margin-top: 14px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: rgba(255, 250, 242, .82);
+      box-shadow: 0 16px 42px rgba(64, 41, 22, .06);
+      transform: translateY(-8px);
+      transition: max-height .38s ease, opacity .28s ease, transform .38s ease, padding .38s ease, border-color .38s ease;
+    }
+    .life-gallery-panel.open {
+      max-height: 260px;
+      opacity: 1;
+      padding: 12px;
+      border-color: var(--line);
+      transform: translateY(0);
+    }
+    .life-gallery-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(170px, 22%);
+      gap: 10px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+    }
+    .life-gallery-track img {
+      width: 100%;
+      height: 176px;
+      min-height: 0;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      scroll-snap-align: center;
+    }
+    .life-gallery-track img.active {
+      border-color: rgba(217, 137, 65, .76);
+      box-shadow: 0 0 0 2px rgba(255, 224, 166, .72);
+    }
+    .life-main img.focus-left {
+      object-position: 8% center;
+    }
+    .life-main img.focus-right {
+      object-position: 78% center;
+    }
+
+    .work-card {
+      min-height: 192px;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .work-card::after {
+      content: "";
+      position: absolute;
+      right: -32px;
+      top: -40px;
+      width: 128px;
+      height: 128px;
+      background: rgba(154, 170, 135, .18);
+      border: 1px solid rgba(154, 170, 135, .16);
+      border-radius: 50%;
+    }
+    .work-card:nth-child(2)::after { background: rgba(232, 170, 163, .2); }
+    .work-card:nth-child(3)::after { background: rgba(127, 155, 168, .18); }
+    .status {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(217, 137, 65, .13);
+      color: #8c552c;
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    .social-card {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 14px 16px;
+    }
+    .qr {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 12px;
+    }
+    .qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      background: #fff;
+    }
+    .social-card h3 { margin-top: 0; font-size: 18px; }
+    .social-card p { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    .footer {
+      padding: 34px 0 52px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(34, 27, 22, .46);
+      backdrop-filter: blur(12px);
+    }
+    .modal.open { display: grid; }
+    .modal-panel {
+      width: min(640px, 100%);
+      max-height: min(720px, calc(100svh - 36px));
+      overflow: auto;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, .32);
+      background: #fffaf1;
+      box-shadow: 0 30px 80px rgba(22, 13, 8, .24);
+      transform: translateY(10px) scale(.98);
+      animation: modalIn .22s ease forwards;
+    }
+    @keyframes modalIn { to { transform: translateY(0) scale(1); } }
+    .modal-body { padding: 24px; }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+    .modal h3 { margin: 6px 0 4px; font-size: 25px; }
+    .close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff3df;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+    .modal ul {
+      margin: 0;
+      padding-left: 19px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 720px) {
+      .wrap {
+        width: min(1120px, calc(100% - 56px));
+        max-width: calc(100vw - 56px);
+      }
+      .navlinks { display: flex; }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        width: auto;
+      }
+      .tag { text-align: left; }
+      .hero {
+        min-height: calc(100svh - 118px);
+        padding: 46px 0 60px;
+      }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 430px);
+        align-items: center;
+      }
+      .hero-copy { order: 1; }
+      .portrait-stage { order: 2; max-width: 430px; }
+      .intro { max-width: 650px; font-size: 16px; }
+      section { padding: 76px 0; }
+      .about-grid {
+        grid-template-columns: .95fr 1.05fr;
+        align-items: center;
+      }
+      .experience-grid,
+      .doing-grid,
+      .work-grid,
+      .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .life-strip {
+        grid-auto-columns: minmax(270px, 31%);
+      }
+      .social-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .social-card {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      .qr { width: 100%; }
+    }
+
+    @media (min-width: 1040px) {
+      .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .life-strip { overflow-x: visible; grid-auto-flow: initial; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <nav class="nav wrap" aria-label="主导航">
+        <a class="brand" href="#top" aria-label="回到首页"><span class="seal">周</span><span>周彦君 · 小猪</span></a>
+        <div class="navlinks">
+          <a href="#about">我是谁</a>
+          <a href="#experience">工作背景</a>
+          <a href="#life">生活侧面</a>
+          <a href="#works">作品</a>
+          <a href="#contact">联系</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Operator / Vibe Coder in Progress</div>
+            <h1>你好，<br>我是周彦君</h1>
+            <div class="hero-subtitle" aria-live="polite"><span id="typewriter"></span><span class="cursor">|</span></div>
+            <p class="intro">商科教育背景，前产品经理，现金融行业运营人<br>正在从 0 编程背景开始学习成为 Vibe Coder<br>我想用 AI 和代码，把生活与工作里的用户洞察，变成真正可用的小工具</p>
+            <div class="tags" aria-label="个人关键词">
+              <span class="tag">9 年金融用户运营</span>
+              <span class="tag">内容生态 & 活动增长</span>
+              <span class="tag">AI 学习转型</span>
+              <span class="tag">温柔但有力量</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn primary" href="#works">看我的作品</a>
+              <a class="btn" href="#life">了解更多的我</a>
+            </div>
+          </div>
+
+          <div class="portrait-stage" id="portraitStage">
+            <div class="portrait-card">
+              <img id="portrait" src="picture/Personal%20image/1.jpg" alt="周彦君个人形象照">
+              <div class="photo-switch" aria-label="切换个人形象照">
+                <button class="dot active" type="button" title="形象照一" data-src="picture/Personal%20image/1.jpg"></button>
+                <button class="dot" type="button" title="形象照二" data-src="picture/Personal%20image/3.jpg"></button>
+              </div>
+            </div>
+            <div class="portrait-note">长期主义者，<br>也是人生体验派</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-band" id="about">
+        <div class="wrap about-grid reveal">
+          <p class="quote">我相信，<mark>洞察人</mark>和<mark>做成事</mark>，都需要耐心。</p>
+          <p class="section-copy">过去我在基金平台会员体系、财经大 V 内容生态、活动增长和金融产品获客中打磨运营能力。现在，我把这些经验带进 AI 与代码学习里，尝试从一个具体问题开始，做出更贴近真实人的产品。</p>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Professional Background</div>
+            <h2>工作背景</h2>
+            <p class="section-copy">9年时间，2段经历，1条主线：理解用户、整合资源、把想法推进到真实结果。</p>
+          </div>
+          <div class="experience-grid">
+            <button class="experience-card reveal" type="button" data-exp="lufund">
+              <span class="card-num">01</span>
+              <h3>上海陆金所基金销售有限公司<span class="inline-badge">在职</span></h3>
+              <div class="role">营销部｜运营经理</div>
+              <p class="card-text">基金平台会员全生命周期运营、财经大 V 内容生态及平台活动运营。</p>
+            </button>
+            <button class="experience-card reveal" type="button" data-exp="ctrip">
+              <span class="card-num">02</span>
+              <h3>携程金融</h3>
+              <div class="role">信用卡业务部｜产品经理</div>
+              <p class="card-text">联名信用卡产品设计、活动运营及线上获客渠道，推动申卡转化。</p>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="doing" id="doing">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Now Building</div>
+            <h2>我正在做什么</h2>
+          </div>
+          <div class="doing-grid">
+            <article class="doing-item reveal">
+              <h3>学习 Vibe Coding</h3>
+              <p>从 0 编程背景开始，借助 AI 学习产品原型、网页、小工具和自动化流程，把“我想做”一点点变成“我做出来了”。</p>
+            </article>
+            <article class="doing-item reveal">
+              <h3>开发「折学家」</h3>
+              <p>一个面向骨折患者的康复陪伴工具，关注恢复过程中的记录、提醒、情绪支持和阶段性反馈。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="life">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">More About Me</div>
+            <h2>了解更多的我</h2>
+            <p class="section-copy">职业之外，那些让我保持柔软、笃定和好奇的生活片段。</p>
+          </div>
+          <div class="life-strip" aria-label="生活照片横向滑动">
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img src="picture/Dance/2.jpg" alt="舞蹈照片">
+                <div class="life-caption">
+                  <h3>舞蹈业务爱好者</h3>
+                  <p>30 岁+开始 0 基础学习中国舞，学会用身体表达。古典舞、民族舞、现代舞和当代舞都很爱。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="舞蹈照片合集">
+                <img class="active" src="picture/Dance/2.jpg" alt="舞蹈照片 2">
+                <img src="picture/Dance/1.jpg" alt="舞蹈照片 1">
+                <img src="picture/Dance/3.jpg" alt="舞蹈照片 3">
+                <img src="picture/Dance/4.jpg" alt="舞蹈照片 4">
+                <img src="picture/Dance/5.jpg" alt="舞蹈照片 5">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img class="focus-left" src="picture/Marathon/1.jpg" alt="马拉松照片">
+                <div class="life-caption">
+                  <h3>马拉松完赛人</h3>
+                  <p>以前 800 米都跑不下来的人，2025 年开始跑步，2026 年完成首半马。慢慢来，也可以抵达。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="马拉松照片合集">
+                <img class="active" src="picture/Marathon/1.jpg" alt="马拉松照片 1" data-focus="left">
+                <img src="picture/Marathon/2.jpg" alt="马拉松照片 2">
+                <img src="picture/Marathon/3.jpg" alt="马拉松照片 3">
+                <img src="picture/Marathon/4.jpg" alt="马拉松照片 4">
+                <img src="picture/Marathon/5.jpg" alt="马拉松照片 5">
+                <img src="picture/Marathon/6.jpg" alt="马拉松照片 6">
+                <img src="picture/Marathon/7.jpg" alt="马拉松照片 7">
+                <img src="picture/Marathon/8.jpg" alt="马拉松照片 8">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img class="focus-right" src="picture/Cats/3.jpg" alt="猫咪照片">
+                <div class="life-caption">
+                  <h3>流浪猫守护者</h3>
+                  <p>Cat is always right.<br>记录遇见的猫，也记录生活里柔软、真实的一面。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="猫咪照片合集">
+                <img class="active" src="picture/Cats/3.jpg" alt="猫咪照片 3" data-focus="right">
+                <img src="picture/Cats/2.jpg" alt="猫咪照片 2">
+                <img src="picture/Cats/4.jpg" alt="猫咪照片 4">
+                <img src="picture/Cats/5.jpg" alt="猫咪照片 5">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img src="picture/Ancient-style%20portrait/1.jpg" alt="古风摄影照片">
+                <div class="life-caption">
+                  <h3>古风摄影爱好者</h3>
+                  <p>清清如我，淡淡着色。<br>中国古典的美，长在每一位中国女性的身上。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="古风摄影照片合集">
+                <img class="active" src="picture/Ancient-style%20portrait/1.jpg" alt="古风摄影照片 1">
+                <img src="picture/Ancient-style%20portrait/2.jpg" alt="古风摄影照片 2">
+                <img src="picture/Ancient-style%20portrait/3.jpg" alt="古风摄影照片 3">
+                <img src="picture/Ancient-style%20portrait/4.jpg" alt="古风摄影照片 4">
+                <img src="picture/Ancient-style%20portrait/5.jpg" alt="古风摄影照片 5">
+                <img src="picture/Ancient-style%20portrait/6.jpg" alt="古风摄影照片 6">
+                <img src="picture/Ancient-style%20portrait/7.jpg" alt="古风摄影照片 7">
+                <img src="picture/Ancient-style%20portrait/8.jpg" alt="古风摄影照片 8">
+                <img src="picture/Ancient-style%20portrait/9.jpg" alt="古风摄影照片 9">
+              </div>
+            </article>
+          </div>
+          <div class="life-gallery-panel" id="lifeGalleryPanel" aria-live="polite">
+            <div class="life-gallery-track" id="lifeGalleryTrack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="works">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Selected Works</div>
+            <h2>我的作品</h2>
+          </div>
+          <div class="work-grid">
+            <article class="work-card reveal">
+              <span class="card-num">Product 01</span>
+              <h3>折学家</h3>
+              <p class="card-text">一个面向骨折患者的康复陪伴工具，孵化中，预计 2026 年 Q3 上线。</p>
+              <span class="status">Applicaiton Program</span>
+            </article>
+            <article class="work-card reveal">
+              <span class="card-num">Journal 02</span>
+              <h3>AI 实践日记</h3>
+              <p class="card-text">记录0编程背景小白成为Vibe Coder的学习过程、真实踩坑和产品思考。</p>
+              <span class="status">Recording</span>
+            </article>
+            <article class="work-card reveal">
+              <span class="card-num">Next 03</span>
+              <h3>敬请期待</h3>
+              <p class="card-text">更多灵感发芽中。把细小但真实的问题，做成可以被使用的答案。</p>
+              <span class="status">Coming Soon</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Social & Contact</div>
+            <h2>社交媒体</h2>
+            <p class="section-copy">可以通过我的社交媒体找到我 :)</p>
+          </div>
+          <p class="contact-email reveal">当然，也可以通过邮箱与我联系 <a href="mailto:angell0508@126.com">angell0508@126.com</a></p>
+          <div class="social-grid">
+            <a class="social-card reveal" href="#" aria-label="小红书 周小猪">
+              <div class="qr"><img src="picture/redbook.jpg" alt="小红书二维码"></div>
+              <div>
+                <h3>小红书</h3>
+                <div class="role">日常记录｜@周小猪</div>
+                <p>生活、学习、思考和一点点自我更新。</p>
+              </div>
+            </a>
+            <a class="social-card reveal" href="#" aria-label="视频号 周小猪爱吃肉">
+              <div class="qr"><img src="picture/wechat_video.jpg" alt="视频号二维码"></div>
+              <div>
+                <h3>视频号</h3>
+                <div class="role">舞蹈日记｜@周小猪爱吃肉</div>
+                <p>记录舞蹈练习，也记录身体慢慢打开的过程。</p>
+              </div>
+            </a>
+            <a class="social-card reveal" href="#" aria-label="小宇宙 小猪的AI实践日记">
+              <div class="qr"><img src="picture/radio.jpg" alt="小宇宙二维码"></div>
+              <div>
+                <h3>小宇宙</h3>
+                <div class="role">AI 实践日记｜@小猪的AI实践日记</div>
+                <p>把探索路上的尝试、复盘和灵感说给你听。</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">© 2026 周彦君 · 小猪。愿每一个慢慢来的瞬间，都在靠近答案。</div>
+    </footer>
+  </div>
+
+  <div class="modal" id="expModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-body">
+        <div class="modal-top">
+          <div>
+            <div class="kicker" id="modalKicker">Experience</div>
+            <h3 id="modalTitle"></h3>
+            <div class="role" id="modalRole"></div>
+          </div>
+          <button class="close" type="button" aria-label="关闭弹窗">×</button>
+        </div>
+        <ul id="modalList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const typeTarget = document.querySelector("#typewriter");
+    const typeText = "也可以叫我小猪";
+    let typeIndex = 0;
+    const type = () => {
+      typeTarget.textContent = typeText.slice(0, typeIndex);
+      typeIndex += 1;
+      if (typeIndex <= typeText.length) window.setTimeout(type, 58);
+    };
+    type();
+
+    const portrait = document.querySelector("#portrait");
+    document.querySelectorAll(".dot").forEach((dot) => {
+      dot.addEventListener("click", () => {
+        document.querySelectorAll(".dot").forEach((item) => item.classList.remove("active"));
+        dot.classList.add("active");
+        portrait.style.opacity = "0";
+        window.setTimeout(() => {
+          portrait.src = dot.dataset.src;
+          portrait.style.opacity = "1";
+        }, 180);
+      });
+    });
+
+    const stage = document.querySelector("#portraitStage");
+    stage.addEventListener("pointermove", (event) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      stage.querySelector(".portrait-card").style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+    });
+    stage.addEventListener("pointerleave", () => {
+      stage.querySelector(".portrait-card").style.transform = "";
+    });
+
+    const experiences = {
+      lufund: {
+        title: "上海陆金所基金销售有限公司",
+        role: "营销部｜运营经理",
+        items: [
+          "负责基金平台会员全生命周期运营，围绕新客、活跃、留存与权益感知设计运营动作。",
+          "从 0 到 1 搭建会员等级与权益体系，让平台服务更有层次，也更容易被用户理解。",
+          "搭建财经大 V 合作体系，连接内容、专家影响力与平台活动运营。",
+          "长期处理金融用户沟通、内容表达和增长目标之间的平衡。"
+        ]
+      },
+      ctrip: {
+        title: "携程金融",
+        role: "信用卡业务部｜产品经理",
+        items: [
+          "参与携程联名信用卡产品设计、活动运营及线上获客渠道建设。",
+          "通过申卡流程优化、场景化营销和群分触达策略，推动申卡进件转化率提升。",
+          "在旅行消费场景中理解用户需求，把金融产品表达得更轻、更清楚。",
+          "积累了产品协作、渠道运营和转化链路分析经验。"
+        ]
+      }
+    };
+
+    const modal = document.querySelector("#expModal");
+    const modalTitle = document.querySelector("#modalTitle");
+    const modalRole = document.querySelector("#modalRole");
+    const modalList = document.querySelector("#modalList");
+    const closeModal = () => modal.classList.remove("open");
+
+    document.querySelectorAll("[data-exp]").forEach((card) => {
+      card.addEventListener("click", () => {
+        const data = experiences[card.dataset.exp];
+        modalTitle.textContent = data.title;
+        modalRole.textContent = data.role;
+        modalList.innerHTML = data.items.map((item) => `<li>${item}</li>`).join("");
+        modal.classList.add("open");
+      });
+    });
+    document.querySelector(".close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    const lifePanel = document.querySelector("#lifeGalleryPanel");
+    const lifeTrack = document.querySelector("#lifeGalleryTrack");
+    let activeLifeCard = null;
+
+    document.querySelectorAll(".life-card").forEach((card) => {
+      const main = card.querySelector(".life-main");
+      const mainImg = main.querySelector("img");
+      const sourceThumbs = [...card.querySelectorAll(".life-gallery img")];
+      const closePanel = () => {
+        lifePanel.classList.remove("open");
+        card.classList.remove("expanded");
+        main.setAttribute("aria-expanded", "false");
+        if (activeLifeCard === card) activeLifeCard = null;
+      };
+
+      const openPanel = () => {
+        document.querySelectorAll(".life-card.expanded").forEach((item) => {
+          item.classList.remove("expanded");
+          item.querySelector(".life-main").setAttribute("aria-expanded", "false");
+        });
+
+        lifeTrack.innerHTML = "";
+        sourceThumbs.forEach((thumb) => {
+          const image = thumb.cloneNode(true);
+          image.addEventListener("click", () => {
+            mainImg.src = image.src;
+            mainImg.alt = image.alt;
+            mainImg.classList.toggle("focus-left", image.dataset.focus === "left");
+            mainImg.classList.toggle("focus-right", image.dataset.focus === "right");
+            lifeTrack.querySelectorAll("img").forEach((item) => item.classList.remove("active"));
+            image.classList.add("active");
+          });
+          lifeTrack.appendChild(image);
+        });
+
+        card.classList.add("expanded");
+        main.setAttribute("aria-expanded", "true");
+        activeLifeCard = card;
+        requestAnimationFrame(() => lifePanel.classList.add("open"));
+      };
+
+      const togglePanel = () => {
+        if (activeLifeCard === card && lifePanel.classList.contains("open")) {
+          closePanel();
+        } else {
+          openPanel();
+        }
+      };
+
+      main.addEventListener("click", togglePanel);
+      main.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          togglePanel();
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+  </script>
+</body>
+</html>
