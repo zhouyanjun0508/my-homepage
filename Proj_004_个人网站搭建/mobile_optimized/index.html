@@ -1,0 +1,2210 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="周彦君（小猪）的个人主页：互联网金融运营人，正在学习成为 Vibe Coder。">
+  <title>周彦君 · 小猪</title>
+  <style>
+    :root {
+      --paper: #fbf7ef;
+      --paper-deep: #f2eadb;
+      --ink: #302820;
+      --muted: #7b6b5d;
+      --line: rgba(65, 49, 36, .14);
+      --amber: #d98941;
+      --cream: #ffe0a6;
+      --green: #9aaa87;
+      --rose: #e8aaa3;
+      --blue: #7f9ba8;
+      --shadow: 0 18px 55px rgba(53, 38, 24, .12);
+      --radius: 8px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--sans);
+      background:
+        repeating-linear-gradient(90deg, rgba(81, 58, 31, .025) 0, rgba(81, 58, 31, .025) 1px, transparent 1px, transparent 7px),
+        linear-gradient(180deg, var(--paper), #fffaf3 48%, #f6efe3);
+      letter-spacing: 0;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    .page { overflow: hidden; }
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      max-width: calc(100vw - 36px);
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251, 247, 239, .82);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .seal {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(137, 71, 40, .26);
+      background: #fff7ea;
+      color: #a44f35;
+      font-size: 14px;
+      border-radius: 6px;
+      box-shadow: 0 7px 20px rgba(122, 66, 28, .08);
+    }
+    .navlinks {
+      display: none;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .navlinks a {
+      padding: 9px 10px;
+      border-radius: 999px;
+    }
+    .navlinks a:hover { background: rgba(217, 137, 65, .13); color: var(--ink); }
+
+    .hero {
+      min-height: calc(100svh - 116px);
+      display: grid;
+      align-items: center;
+      padding: 30px 0 38px;
+    }
+    .hero-grid {
+      display: grid;
+      gap: 26px;
+      min-width: 0;
+    }
+    .hero-copy { min-width: 0; }
+    .eyebrow {
+      width: fit-content;
+      color: #8b5b34;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      background: rgba(255, 224, 166, .56);
+      border: 1px solid rgba(217, 137, 65, .22);
+      padding: 7px 10px;
+      border-radius: 999px;
+    }
+    h1 {
+      margin: 15px 0 0;
+      font-size: clamp(39px, 11vw, 86px);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    .hero-subtitle {
+      min-height: 68px;
+      margin: 18px 0 0;
+      color: #4d4035;
+      font-size: clamp(17px, 4.8vw, 25px);
+      line-height: 1.65;
+      font-weight: 650;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    .cursor { color: var(--amber); animation: blink .9s steps(2, start) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .intro {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.9;
+      max-width: 330px;
+      overflow-wrap: anywhere;
+      word-break: break-all;
+    }
+    .tags {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9px;
+      margin-top: 22px;
+      width: min(100%, 260px);
+      max-width: 100%;
+    }
+    .tag {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .45);
+      color: #5c4d40;
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 13px;
+      text-align: center;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff8ec;
+      box-shadow: 0 8px 20px rgba(63, 42, 24, .06);
+      cursor: pointer;
+    }
+    .btn.primary {
+      color: #231911;
+      background: var(--cream);
+      border-color: rgba(217, 137, 65, .34);
+      font-weight: 760;
+    }
+    .portrait-stage {
+      position: relative;
+      width: 100%;
+      max-width: 342px;
+      min-width: 0;
+      margin: 0 auto;
+      transform-style: preserve-3d;
+    }
+    .portrait-card {
+      position: relative;
+      aspect-ratio: 4 / 5.25;
+      overflow: hidden;
+      border: 1px solid rgba(65, 49, 36, .12);
+      border-radius: var(--radius);
+      background: #efe2d0;
+      box-shadow: var(--shadow);
+      transform: translate3d(0, 0, 0);
+      transition: transform .35s ease;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .portrait-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 66% center;
+      transition: opacity .28s ease, transform .55s ease;
+    }
+    .portrait-card:hover img { transform: scale(1.035); }
+    .portrait-note {
+      position: absolute;
+      right: -10px;
+      bottom: 24px;
+      max-width: 154px;
+      padding: 11px 12px;
+      background: rgba(255, 250, 240, .92);
+      border: 1px solid rgba(65, 49, 36, .13);
+      border-radius: 6px;
+      color: #6a594c;
+      font-size: 12px;
+      line-height: 1.55;
+      box-shadow: 0 13px 32px rgba(52, 34, 21, .1);
+      transform: rotate(2deg);
+    }
+    .photo-switch {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      display: flex;
+      gap: 7px;
+      z-index: 2;
+    }
+    .dot {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255, 255, 255, .76);
+      border-radius: 50%;
+      background: rgba(39, 31, 25, .3);
+      cursor: pointer;
+    }
+    .dot.active { background: var(--cream); }
+
+    section { padding: 54px 0; }
+    .section-head {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .kicker {
+      color: #9a623a;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      font-size: clamp(27px, 8vw, 44px);
+      line-height: 1.13;
+      letter-spacing: 0;
+    }
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 15px;
+    }
+    .contact-email {
+      margin: -10px 0 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+    .contact-email a {
+      color: #8b5b34;
+      font-weight: 760;
+      border-bottom: 1px solid rgba(139, 91, 52, .28);
+    }
+    .about-band {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .28);
+    }
+    .about-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .quote {
+      margin: 0;
+      font-size: clamp(23px, 6.8vw, 42px);
+      line-height: 1.35;
+      font-weight: 800;
+    }
+    .quote mark {
+      background: linear-gradient(transparent 57%, rgba(255, 224, 166, .85) 57%);
+      color: inherit;
+    }
+
+    .experience-grid,
+    .work-grid,
+    .social-grid {
+      display: grid;
+      gap: 14px;
+    }
+    .experience-card,
+    .work-card,
+    .social-card {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 252, 246, .72);
+      box-shadow: 0 12px 34px rgba(64, 41, 22, .07);
+    }
+    .experience-card {
+      width: 100%;
+      min-height: 205px;
+      padding: 20px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .experience-card:hover,
+    .work-card:hover,
+    .social-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 46px rgba(64, 41, 22, .1);
+    }
+    .experience-card,
+    .work-card,
+    .social-card { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-num {
+      color: var(--amber);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+    .experience-card h3,
+    .work-card h3,
+    .social-card h3 {
+      margin: 12px 0 6px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+    .inline-badge {
+      display: inline-flex;
+      align-items: center;
+      margin-left: 8px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: rgba(154, 170, 135, .18);
+      color: #667251;
+      font-size: 12px;
+      font-weight: 760;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .role {
+      color: #9b6d43;
+      font-weight: 720;
+      font-size: 14px;
+    }
+    .card-text {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .doing {
+      background: #fffaf2;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .doing-grid {
+      display: grid;
+      gap: 15px;
+    }
+    .doing-item {
+      min-height: 160px;
+      padding: 20px;
+      border-left: 4px solid var(--amber);
+      background: rgba(255, 255, 255, .55);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: 0 12px 30px rgba(63, 42, 24, .06);
+    }
+    .doing-item:nth-child(2) { border-left-color: var(--green); }
+    .doing-item h3 { margin: 0 0 10px; font-size: 21px; }
+    .doing-item p { margin: 0; color: var(--muted); line-height: 1.85; }
+
+    .life-strip {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(252px, 82%);
+      gap: 14px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding: 3px 4px 18px;
+      margin: 0 -4px;
+    }
+    .life-strip::-webkit-scrollbar { height: 8px; }
+    .life-strip::-webkit-scrollbar-thumb { background: rgba(124, 92, 64, .22); border-radius: 999px; }
+    .life-card {
+      scroll-snap-align: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: #e8decf;
+      box-shadow: var(--shadow);
+      height: 420px;
+    }
+    .life-main {
+      position: relative;
+      height: 420px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .life-main::after {
+      content: "点击切换封面图";
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, .24);
+      border-radius: 999px;
+      background: rgba(38, 29, 22, .54);
+      color: #fffaf4;
+      font-size: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .12);
+      backdrop-filter: blur(10px);
+      opacity: .92;
+    }
+    .life-card.expanded .life-main::after {
+      content: "点击收起";
+      background: rgba(217, 137, 65, .74);
+    }
+    .life-main img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: cover;
+      transition: transform .55s ease, filter .35s ease;
+    }
+    .life-main:hover img { transform: scale(1.06); filter: saturate(1.04); }
+    .life-caption {
+      position: absolute;
+      inset: auto 12px 12px;
+      min-height: 124px;
+      padding: 14px;
+      color: #fffaf4;
+      background: rgba(38, 29, 22, .58);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 7px;
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .life-caption h3 { margin: 0 0 6px; font-size: 20px; }
+    .life-caption p { margin: 0; font-size: 13px; line-height: 1.65; color: rgba(255, 250, 244, .84); }
+    .life-gallery { display: none; }
+    .life-gallery-panel {
+      grid-column: 1 / -1;
+      margin-top: 14px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      border: 1px solid transparent;
+      border-radius: var(--radius);
+      background: rgba(255, 250, 242, .82);
+      box-shadow: 0 16px 42px rgba(64, 41, 22, .06);
+      transform: translateY(-8px);
+      transition: max-height .38s ease, opacity .28s ease, transform .38s ease, padding .38s ease, border-color .38s ease;
+    }
+    .life-gallery-panel.open {
+      max-height: 260px;
+      opacity: 1;
+      padding: 12px;
+      border-color: var(--line);
+      transform: translateY(0);
+    }
+    .life-gallery-track {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(170px, 22%);
+      gap: 10px;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+    }
+    .life-gallery-track img {
+      width: 100%;
+      height: 176px;
+      min-height: 0;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      cursor: pointer;
+      scroll-snap-align: center;
+    }
+    .life-gallery-track img.active {
+      border-color: rgba(217, 137, 65, .76);
+      box-shadow: 0 0 0 2px rgba(255, 224, 166, .72);
+    }
+    .life-main img.focus-left {
+      object-position: 8% center;
+    }
+    .life-main img.focus-right {
+      object-position: 78% center;
+    }
+
+    .work-card {
+      min-height: 192px;
+      padding: 20px;
+      overflow: hidden;
+    }
+    .work-card::after {
+      content: "";
+      position: absolute;
+      right: -32px;
+      top: -40px;
+      width: 128px;
+      height: 128px;
+      background: rgba(154, 170, 135, .18);
+      border: 1px solid rgba(154, 170, 135, .16);
+      border-radius: 50%;
+    }
+    .work-card:nth-child(2)::after { background: rgba(232, 170, 163, .2); }
+    .work-card:nth-child(3)::after { background: rgba(127, 155, 168, .18); }
+    .status {
+      display: inline-flex;
+      margin-top: 15px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(217, 137, 65, .13);
+      color: #8c552c;
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+
+    .social-card {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px 14px 16px;
+    }
+    .qr {
+      aspect-ratio: 1;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 12px;
+    }
+    .qr img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      background: #fff;
+    }
+    .social-card h3 { margin-top: 0; font-size: 18px; }
+    .social-card p { margin: 6px 0 0; color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    .footer {
+      padding: 34px 0 52px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(34, 27, 22, .46);
+      backdrop-filter: blur(12px);
+    }
+    .modal.open { display: grid; }
+    .modal-panel {
+      width: min(640px, 100%);
+      max-height: min(720px, calc(100svh - 36px));
+      overflow: auto;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, .32);
+      background: #fffaf1;
+      box-shadow: 0 30px 80px rgba(22, 13, 8, .24);
+      transform: translateY(10px) scale(.98);
+      animation: modalIn .22s ease forwards;
+    }
+    @keyframes modalIn { to { transform: translateY(0) scale(1); } }
+    .modal-body { padding: 24px; }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+    .modal h3 { margin: 6px 0 4px; font-size: 25px; }
+    .close {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff3df;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 1;
+    }
+    .modal ul {
+      margin: 0;
+      padding-left: 19px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (min-width: 720px) {
+      .wrap {
+        width: min(1120px, calc(100% - 56px));
+        max-width: calc(100vw - 56px);
+      }
+      .navlinks { display: flex; }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        width: auto;
+      }
+      .tag { text-align: left; }
+      .hero {
+        min-height: calc(100svh - 118px);
+        padding: 46px 0 60px;
+      }
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(330px, 430px);
+        align-items: center;
+      }
+      .hero-copy { order: 1; }
+      .portrait-stage { order: 2; max-width: 430px; }
+      .intro { max-width: 650px; font-size: 16px; }
+      section { padding: 76px 0; }
+      .about-grid {
+        grid-template-columns: .95fr 1.05fr;
+        align-items: center;
+      }
+      .experience-grid,
+      .doing-grid,
+      .work-grid,
+      .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .life-strip {
+        grid-auto-columns: minmax(270px, 31%);
+      }
+      .social-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .social-card {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+      .qr { width: 100%; }
+    }
+
+    @media (min-width: 1040px) {
+      .work-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .life-strip { overflow-x: visible; grid-auto-flow: initial; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    .mobile-app { display: none; }
+
+    @media (max-width: 719px) {
+      body {
+        background:
+          repeating-linear-gradient(90deg, rgba(81, 58, 31, .024) 0, rgba(81, 58, 31, .024) 1px, transparent 1px, transparent 7px),
+          #f7f2e7;
+        overflow-x: hidden;
+      }
+      .page { display: none; }
+      .mobile-app {
+        display: block;
+        min-height: 100svh;
+        color: var(--ink);
+        padding-bottom: 86px;
+        width: 100%;
+        max-width: 390px;
+        margin: 0;
+        overflow-x: hidden;
+      }
+      .m-top {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 18px;
+        background: rgba(247, 242, 231, .9);
+        border-bottom: 1px solid rgba(65, 49, 36, .12);
+        backdrop-filter: blur(14px);
+      }
+      .m-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+      }
+      .m-avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid rgba(217, 137, 65, .34);
+      }
+      .m-menu {
+        width: 34px;
+        height: 34px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        font-size: 24px;
+        line-height: 1;
+      }
+      .m-menu-popover {
+        position: fixed;
+        top: 56px;
+        right: 14px;
+        z-index: 40;
+        display: none;
+        width: 168px;
+        padding: 8px;
+        border: 1px solid rgba(65, 49, 36, .12);
+        border-radius: 16px;
+        background: rgba(255, 252, 246, .96);
+        box-shadow: 0 18px 50px rgba(64, 41, 22, .16);
+        backdrop-filter: blur(14px);
+      }
+      .m-menu-popover.open { display: grid; gap: 4px; }
+      .m-menu-item {
+        min-height: 40px;
+        border: 0;
+        border-radius: 12px;
+        background: transparent;
+        color: #4d4035;
+        text-align: left;
+        padding: 0 12px;
+        font-size: 14px;
+      }
+      .m-menu-item.active {
+        background: rgba(255, 215, 122, .3);
+        color: #c26d1f;
+        font-weight: 800;
+      }
+      .m-panel {
+        display: none;
+        padding: 20px 14px 26px;
+        overflow-x: hidden;
+      }
+      .m-panel.active { display: block; }
+      .m-kicker {
+        display: inline-flex;
+        margin-bottom: 12px;
+        padding: 6px 9px;
+        border: 1px solid rgba(217, 137, 65, .22);
+        border-radius: 999px;
+        background: rgba(255, 224, 166, .48);
+        color: #8b5b34;
+        font-family: var(--mono);
+        font-size: 11px;
+      }
+      .m-hero-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(140px, 38vw, 150px);
+        gap: 8px;
+        align-items: stretch;
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .m-hero-copy,
+      .m-portrait { min-width: 0; }
+      .m-hero-copy h1 {
+        margin: 0;
+        font-size: clamp(36px, 11.5vw, 48px);
+        line-height: 1.02;
+        word-break: keep-all;
+      }
+      .m-hero-copy h2 {
+        margin: 10px 0 0;
+        font-size: 21px;
+        line-height: 1.28;
+      }
+      .m-intro {
+        margin: 18px 0 0;
+        color: #66574b;
+        font-size: 13px;
+        line-height: 1.85;
+      }
+      .m-portrait {
+        position: relative;
+        width: clamp(140px, 38vw, 150px);
+        min-height: 342px;
+        border: 1px solid rgba(65, 49, 36, .13);
+        border-radius: 18px;
+        overflow: hidden;
+        background: #eadfce;
+        box-shadow: 0 18px 42px rgba(64, 41, 22, .12);
+      }
+      .m-portrait img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 62% center;
+      }
+      .m-portrait img.is-headshot {
+        object-position: center 18%;
+      }
+      .m-note {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        max-width: 130px;
+        padding: 9px 10px;
+        border-radius: 10px;
+        background: rgba(255, 250, 240, .92);
+        color: #6a594c;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .m-photo-switch {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        z-index: 2;
+        display: flex;
+        gap: 7px;
+      }
+      .m-photo-dot {
+        width: 24px;
+        height: 24px;
+        border: 1px solid rgba(255, 255, 255, .75);
+        border-radius: 50%;
+        background: rgba(39, 31, 25, .34);
+      }
+      .m-photo-dot.active {
+        background: var(--cream);
+      }
+      .m-tags {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin: 18px 0 0;
+        max-width: 100%;
+      }
+      .m-tag,
+      .m-filter {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid rgba(65, 49, 36, .12);
+        border-radius: 999px;
+        background: rgba(255, 252, 246, .74);
+        color: #5f5146;
+        font-size: 13px;
+      }
+      .m-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .m-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        border: 1px solid rgba(217, 137, 65, .34);
+        border-radius: 18px;
+        background: #fff8ec;
+        font-weight: 800;
+      }
+      .m-btn.primary {
+        background: linear-gradient(180deg, #ffdd8f, #ffc762);
+        border-color: rgba(217, 137, 65, .38);
+      }
+      .m-section-title {
+        margin: 22px 0 12px;
+        font-size: 28px;
+        line-height: 1.18;
+      }
+      .m-section-title.compact {
+        margin-top: 20px;
+        font-size: 22px;
+        line-height: 1.22;
+      }
+      .m-section-title.about-title {
+        margin: 34px 0 8px;
+        font-size: 22px;
+        line-height: 1.22;
+      }
+      .m-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .m-stat,
+      .m-card {
+        border: 1px solid rgba(65, 49, 36, .12);
+        border-radius: 16px;
+        background: rgba(255, 252, 246, .72);
+        box-shadow: 0 10px 30px rgba(64, 41, 22, .06);
+      }
+      .m-stat {
+        min-height: 116px;
+        padding: 13px 10px;
+      }
+      .m-stat b {
+        display: block;
+        margin: 8px 0 4px;
+        font-size: 24px;
+      }
+      .m-stat span {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.35;
+      }
+      .m-about-brief {
+        padding: 10px 14px 8px;
+        margin-bottom: 14px;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+      }
+      .m-about-brief h3 {
+        margin: 0 0 10px;
+        font-size: 27px;
+        line-height: 1.35;
+        letter-spacing: 0;
+      }
+      .m-about-brief mark {
+        padding: 0 5px 2px;
+        background: linear-gradient(180deg, transparent 54%, rgba(255, 215, 122, .46) 0);
+        color: inherit;
+      }
+      .m-about-brief p {
+        color: #74685e;
+        font-size: 15px;
+        line-height: 1.92;
+      }
+      .m-card {
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      .m-card h3 {
+        margin: 0 0 8px;
+        font-size: 20px;
+      }
+      .m-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+      .m-exp {
+        position: relative;
+        padding-left: 28px;
+      }
+      .m-exp::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 18px;
+        bottom: 18px;
+        width: 1px;
+        background: rgba(217, 137, 65, .38);
+      }
+      .m-exp-card {
+        position: relative;
+        padding: 18px 16px 16px;
+      }
+      .m-exp-card::before {
+        content: "";
+        position: absolute;
+        left: -22px;
+        top: 24px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--amber);
+      }
+      .m-exp-card h3 {
+        padding-right: 58px;
+        font-size: 18px;
+        line-height: 1.28;
+      }
+      .m-exp-card .m-status {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        margin-left: 0;
+      }
+      .m-exp-meta {
+        margin-bottom: 8px;
+        color: #7a6d62;
+        font-size: 13px;
+      }
+      .m-bullets {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5px 14px;
+        margin: 0;
+        padding: 0;
+        color: #6f6257;
+        font-size: 13px;
+        line-height: 1.5;
+        list-style: none;
+      }
+      .m-bullets li::before {
+        content: "·";
+        margin-right: 5px;
+        color: #3b2a1e;
+        font-weight: 900;
+      }
+      .m-work-tabs {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      .m-filter.active {
+        background: #ffd77a;
+        color: #3b2a1e;
+        font-weight: 800;
+      }
+      .m-work-card {
+        display: grid;
+        grid-template-columns: 1fr 112px;
+        gap: 12px;
+        min-height: 170px;
+        overflow: hidden;
+      }
+      .m-work-card > div:first-child {
+        display: flex;
+        min-width: 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .m-work-card > div:first-child .m-status {
+        margin-top: auto;
+      }
+      .m-work-card.is-feature {
+        grid-template-columns: 1fr 104px;
+        min-height: 166px;
+        overflow: visible;
+      }
+      .m-work-card.is-feature .m-app-preview {
+        width: 122px;
+        height: 166px;
+        margin: -2px -18px -24px 0;
+        align-self: end;
+        transform: rotate(.2deg);
+      }
+      .m-work-card img {
+        width: 112px;
+        height: 146px;
+        object-fit: cover;
+        border-radius: 14px;
+        align-self: center;
+      }
+      .m-app-preview {
+        width: 112px;
+        height: 146px;
+        align-self: center;
+        border: 1px solid rgba(65, 49, 36, .1);
+        border-radius: 20px;
+        background: linear-gradient(180deg, #fffdf8, #f8eedf);
+        box-shadow: 0 12px 28px rgba(64, 41, 22, .12);
+        padding: 8px;
+        overflow: hidden;
+      }
+      .m-app-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 7px;
+        color: #8b5b34;
+        font-size: 8px;
+        font-weight: 800;
+      }
+      .m-app-dot {
+        width: 17px;
+        height: 17px;
+        border-radius: 50%;
+        background: #ffd77a;
+      }
+      .m-app-chart {
+        height: 42px;
+        margin-bottom: 7px;
+        border-radius: 11px;
+        background:
+          linear-gradient(135deg, transparent 48%, rgba(138, 162, 122, .55) 49%, rgba(138, 162, 122, .55) 52%, transparent 53%),
+          linear-gradient(180deg, #edf7e9, #fdf8ed);
+        border: 1px solid rgba(138, 162, 122, .2);
+        position: relative;
+      }
+      .m-app-chart::before,
+      .m-app-chart::after {
+        content: "";
+        position: absolute;
+        bottom: 8px;
+        width: 9px;
+        border-radius: 4px 4px 0 0;
+        background: #9aaa87;
+      }
+      .m-app-chart::before { left: 18px; height: 14px; }
+      .m-app-chart::after { left: 49px; height: 24px; background: #ffd77a; }
+      .m-app-row {
+        height: 24px;
+        margin-bottom: 7px;
+        border-radius: 10px;
+        background: #fff;
+        border: 1px solid rgba(65, 49, 36, .08);
+      }
+      .m-app-icons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+      }
+      .m-app-icons span {
+        height: 17px;
+        border-radius: 8px;
+        background: rgba(255, 215, 122, .52);
+      }
+      .m-app-icons span:nth-child(2) { background: rgba(154, 170, 135, .32); }
+      .m-app-icons span:nth-child(3) { background: rgba(127, 155, 168, .22); }
+      .m-radio-preview,
+      .m-sprout-preview {
+        width: 112px;
+        height: 146px;
+        align-self: center;
+        border-radius: 18px;
+        overflow: hidden;
+        position: relative;
+      }
+      .m-radio-preview {
+        background:
+          radial-gradient(circle at 75% 30%, rgba(255, 215, 122, .35) 0 17px, transparent 18px),
+          linear-gradient(180deg, #fff7e6, #fff0d2);
+      }
+      .m-radio-preview::before {
+        content: "";
+        position: absolute;
+        left: 38px;
+        top: 52px;
+        width: 38px;
+        height: 52px;
+        border-radius: 17px 17px 14px 14px;
+        background: linear-gradient(180deg, #f26d4f, #d94d38);
+        box-shadow: 0 0 0 9px rgba(255, 255, 255, .92);
+      }
+      .m-radio-preview::after {
+        content: "AI";
+        position: absolute;
+        right: 14px;
+        top: 32px;
+        width: 30px;
+        height: 30px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        border: 2px solid #8aaa7a;
+        color: #5f9a76;
+        font-size: 12px;
+        font-weight: 900;
+      }
+      .m-radio-title {
+        display: none;
+      }
+      .m-radio-line {
+        position: absolute;
+        left: 37px;
+        bottom: 24px;
+        width: 42px;
+        height: 3px;
+        border-radius: 999px;
+        background: #3b2a1e;
+      }
+      .m-radio-line::before,
+      .m-radio-line::after {
+        content: "";
+        position: absolute;
+        left: 17px;
+        bottom: 3px;
+        width: 7px;
+        height: 19px;
+        border-radius: 999px;
+        background: #3b2a1e;
+      }
+      .m-radio-line::after {
+        left: 2px;
+        bottom: 10px;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 48%, transparent 0 17px, #3b2a1e 18px 19px, transparent 20px);
+      }
+      .m-sprout-preview {
+        background: linear-gradient(180deg, #fffaf1, #f4edde);
+      }
+      .m-sprout-preview::before {
+        content: "";
+        position: absolute;
+        left: 51px;
+        top: 41px;
+        width: 8px;
+        height: 66px;
+        border-radius: 999px;
+        background: #78956d;
+      }
+      .m-sprout-preview::after {
+        content: "";
+        position: absolute;
+        left: 26px;
+        bottom: 25px;
+        width: 64px;
+        height: 24px;
+        border-radius: 50% 50% 14px 14px;
+        background: #7b5a3b;
+      }
+      .m-leaf {
+        position: absolute;
+        width: 38px;
+        height: 24px;
+        border-radius: 100% 0 100% 0;
+        background: #8aaa7a;
+      }
+      .m-leaf.one { left: 56px; top: 32px; transform: rotate(-18deg); }
+      .m-leaf.two { left: 26px; top: 54px; transform: scaleX(-1) rotate(-20deg); background: #6f9469; }
+      .m-leaf.three { left: 59px; top: 77px; transform: rotate(8deg); background: #9ab483; }
+      .m-note-card {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        gap: 12px;
+        align-items: center;
+      }
+      .m-note-icon {
+        position: relative;
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #ffdc8b, #f5a846);
+        box-shadow: 0 8px 20px rgba(217, 137, 65, .2);
+      }
+      .m-note-icon::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 9px;
+        width: 19px;
+        height: 25px;
+        border-radius: 4px;
+        background: #fff9eb;
+        box-shadow: inset 0 0 0 1px rgba(65, 49, 36, .12);
+      }
+      .m-note-icon::after {
+        content: "";
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        width: 6px;
+        height: 28px;
+        border-radius: 999px;
+        background: #6e9a8a;
+        transform: rotate(42deg);
+        box-shadow: 0 0 0 2px rgba(255, 249, 235, .88);
+      }
+      .m-status {
+        display: inline-flex;
+        margin-left: 8px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(255, 215, 122, .5);
+        color: #9a623a;
+        font-size: 12px;
+      }
+      .m-life-list {
+        display: grid;
+        gap: 12px;
+      }
+      .m-life-card {
+        position: relative;
+        min-height: 176px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ddd0bd;
+        box-shadow: 0 12px 30px rgba(64, 41, 22, .08);
+      }
+      .m-life-card:first-child {
+        min-height: 206px;
+      }
+      .m-life-card img {
+        width: 100%;
+        height: 100%;
+        min-height: inherit;
+        object-fit: cover;
+      }
+      .m-life-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(30, 24, 19, .08) 18%, rgba(30, 24, 19, .16) 46%, rgba(30, 24, 19, .72) 100%);
+      }
+      .m-life-hint {
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        z-index: 2;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(32, 27, 22, .58);
+        color: #fffaf4;
+        font-size: 11px;
+        line-height: 1;
+        box-shadow: inset 0 1px rgba(255, 255, 255, .18);
+        backdrop-filter: blur(10px);
+      }
+      .m-life-text {
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        z-index: 1;
+        min-height: 88px;
+        padding: 12px 13px;
+        border-radius: 12px;
+        background: rgba(32, 27, 22, .66);
+        box-shadow: inset 0 1px rgba(255, 255, 255, .18);
+        backdrop-filter: blur(10px);
+        color: #fffaf4;
+      }
+      .m-life-text h3 {
+        margin: 0 0 6px;
+        font-size: 20px;
+      }
+      .m-life-text p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.55;
+        color: rgba(255, 250, 244, .84);
+      }
+      .m-gallery {
+        display: none;
+        gap: 8px;
+        overflow-x: auto;
+        margin: -4px 0 12px;
+        padding: 10px;
+        border: 1px solid rgba(65, 49, 36, .1);
+        border-radius: 16px;
+        background: rgba(255, 252, 246, .74);
+      }
+      .m-gallery.open { display: flex; }
+      .m-gallery img {
+        flex: 0 0 104px;
+        width: 104px;
+        height: 82px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+      .m-social {
+        display: grid;
+        gap: 10px;
+      }
+      .m-social-card {
+        display: block;
+        min-height: 0;
+        cursor: pointer;
+        transition: transform .22s ease, box-shadow .22s ease;
+      }
+      .m-social-card img {
+        display: block;
+        width: 100%;
+        height: 280px;
+        object-fit: contain;
+        border-radius: 14px;
+        background: #fff;
+        border: 1px solid rgba(65, 49, 36, .1);
+        padding: 14px;
+        margin-top: 12px;
+        box-shadow: 0 8px 24px rgba(64, 41, 22, .08);
+      }
+      .m-social-card:active {
+        transform: scale(.99);
+      }
+      .m-social-card.zoomed {
+        position: fixed;
+        inset: 12px;
+        z-index: 80;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        padding: 18px;
+        border-radius: 24px;
+        background: rgba(255, 252, 246, .98);
+        box-shadow: 0 24px 80px rgba(40, 28, 16, .26);
+      }
+      .m-social-card.zoomed img {
+        height: min(68vh, 620px);
+        margin-top: 14px;
+      }
+      .m-email {
+        margin-top: 10px;
+        color: #8b5b34;
+        font-weight: 760;
+      }
+      .m-tabbar {
+        position: fixed;
+        left: 10px;
+        right: auto;
+        bottom: 10px;
+        z-index: 35;
+        width: min(370px, calc(100vw - 20px));
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        padding: 9px 8px;
+        border: 1px solid rgba(65, 49, 36, .12);
+        border-radius: 22px;
+        background: rgba(255, 252, 246, .92);
+        box-shadow: 0 14px 46px rgba(64, 41, 22, .14);
+        backdrop-filter: blur(14px);
+      }
+      .m-tab {
+        display: grid;
+        place-items: center;
+        gap: 3px;
+        min-height: 50px;
+        border: 0;
+        border-radius: 16px;
+        background: transparent;
+        color: #5f5146;
+        font-size: 12px;
+      }
+      .m-tab .ico { font-size: 20px; line-height: 1; }
+      .m-tab svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        stroke-width: 1.9;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .m-tab.active svg .fill-soft {
+        fill: currentColor;
+        opacity: .16;
+      }
+      .m-tab.active {
+        color: #c26d1f;
+        background: rgba(255, 215, 122, .24);
+        font-weight: 800;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-app" aria-label="移动端个人主页">
+    <header class="m-top">
+      <div class="m-brand">
+        <img class="m-avatar" src="picture/Personal%20image/3.jpg" alt="周彦君头像">
+        <span>周彦君 / 小猪</span>
+      </div>
+      <button class="m-menu" type="button" aria-label="菜单" aria-expanded="false">≡</button>
+    </header>
+    <div class="m-menu-popover" id="mobileMenu" aria-label="移动端菜单">
+      <button class="m-menu-item active" type="button" data-mobile-menu="home">首页</button>
+      <button class="m-menu-item" type="button" data-mobile-menu="works">作品</button>
+      <button class="m-menu-item" type="button" data-mobile-menu="life">生活</button>
+      <button class="m-menu-item" type="button" data-mobile-menu="about">关于我</button>
+    </div>
+
+    <main>
+      <section class="m-panel active" data-mobile-panel="home">
+        <div class="m-kicker">Operator / Vibe Coder in Progress</div>
+        <div class="m-hero-card">
+          <div class="m-hero-copy">
+            <h1>你好，<br>我是<br>周彦君</h1>
+            <h2>也可以叫我小猪</h2>
+            <p class="m-intro">商科教育背景，前产品经理，<br>现金融行业运营人<br>正在从 0 编程背景开始学习<br>成为 Vibe Coder<br>我想用 AI，把生活与<br>工作里的用户洞察，变成真正<br>可用的小工具</p>
+          </div>
+          <div class="m-portrait">
+            <img id="mPortrait" src="picture/Personal%20image/3.jpg" alt="周彦君个人形象照">
+            <div class="m-note">长期主义者，<br>也是人生体验派</div>
+            <div class="m-photo-switch" aria-label="切换个人形象照">
+              <button class="m-photo-dot active" type="button" data-mobile-photo="picture/Personal%20image/3.jpg" aria-label="生活形象照"></button>
+              <button class="m-photo-dot" type="button" data-mobile-photo="picture/Personal%20image/1.jpg" data-headshot="true" aria-label="职业形象照"></button>
+            </div>
+          </div>
+        </div>
+        <div class="m-tags">
+          <span class="m-tag">9 年金融用户运营</span>
+          <span class="m-tag">内容生态 & 活动增长</span>
+          <span class="m-tag">AI 学习转型</span>
+          <span class="m-tag">温柔但有力量</span>
+        </div>
+        <div class="m-actions">
+          <button class="m-btn primary" type="button" data-mobile-jump="works">看我的作品</button>
+          <button class="m-btn" type="button" data-mobile-jump="life">了解更多的我</button>
+        </div>
+
+        <h2 class="m-section-title about-title">关于我</h2>
+        <article class="m-about-brief">
+          <h3>我相信，<mark>洞察人</mark>和<mark>做成事</mark>，都需要耐心。</h3>
+          <p>过去我在基金平台会员体系、财经大 V 内容生态、活动增长和金融产品获客中打磨运营能力。现在，我把这些经验带进 AI 学习里，尝试从一个具体问题开始，做出更贴近真实人的产品。</p>
+        </article>
+
+        <h2 class="m-section-title compact">工作背景</h2>
+        <div class="m-exp">
+          <article class="m-card m-exp-card">
+            <h3>上海陆金所基金销售有限公司 <span class="m-status">在职</span></h3>
+            <div class="m-exp-meta">营销部｜运营经理</div>
+            <ul class="m-bullets">
+              <li>会员体系</li>
+              <li>活动运营</li>
+              <li>内容生态</li>
+              <li>大 V 合作</li>
+            </ul>
+          </article>
+          <article class="m-card m-exp-card">
+            <h3>携程金融</h3>
+            <div class="m-exp-meta">信用卡业务部｜产品经理</div>
+            <ul class="m-bullets">
+              <li>联名卡产品设计</li>
+              <li>线上获客</li>
+              <li>场景化运营</li>
+            </ul>
+          </article>
+        </div>
+
+        <h2 class="m-section-title compact">正在做什么</h2>
+        <article class="m-card m-work-card is-feature">
+          <div>
+            <h3>开发「折学家」</h3>
+            <p>一个面向骨折患者的康复陪伴工具，关注恢复过程中的记录、提醒、情绪陪伴和阶段性反馈。</p>
+          </div>
+          <div class="m-app-preview" aria-label="折学家应用界面示意">
+            <div class="m-app-top"><span>折学家</span><span class="m-app-dot"></span></div>
+            <div class="m-app-chart"></div>
+            <div class="m-app-row"></div>
+            <div class="m-app-row"></div>
+            <div class="m-app-icons"><span></span><span></span><span></span></div>
+          </div>
+        </article>
+        <article class="m-card m-note-card">
+          <div class="m-note-icon" aria-hidden="true"></div>
+          <div>
+            <h3>Vibe Coding实践</h3>
+            <p>以0编程背景，借助AI工具，把“我想做”一点点变成“我做出来了”</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="m-panel" data-mobile-panel="works">
+        <h2 class="m-section-title">我的作品</h2>
+        <article class="m-card m-work-card">
+          <div>
+            <h3>折学家</h3>
+            <p>一个面向骨折患者的康复陪伴工具，孵化中，预计2026年Q3上线。</p>
+            <span class="m-status">Application Program</span>
+          </div>
+          <div class="m-app-preview" aria-label="折学家应用界面示意">
+            <div class="m-app-top"><span>折学家</span><span class="m-app-dot"></span></div>
+            <div class="m-app-chart"></div>
+            <div class="m-app-row"></div>
+            <div class="m-app-row"></div>
+            <div class="m-app-icons"><span></span><span></span><span></span></div>
+          </div>
+        </article>
+        <article class="m-card m-work-card">
+          <div>
+            <h3>小猪的 AI 实践日记</h3>
+            <p>分享我的 AI 学习与实践，每周更新思考与实战笔记。</p>
+            <span class="m-status">Recording</span>
+          </div>
+          <div class="m-radio-preview" aria-label="AI 实践日记插画">
+            <div class="m-radio-title">小猪的<br>AI 实践日记</div>
+            <span class="m-radio-line"></span>
+          </div>
+        </article>
+        <article class="m-card m-work-card">
+          <div>
+            <h3>更多灵感发芽</h3>
+            <p>把细小但真实的问题，做成可以被使用的答案。</p>
+            <span class="m-status">Coming Soon</span>
+          </div>
+          <div class="m-sprout-preview" aria-label="灵感发芽插画">
+            <span class="m-leaf one"></span>
+            <span class="m-leaf two"></span>
+            <span class="m-leaf three"></span>
+          </div>
+        </article>
+      </section>
+
+      <section class="m-panel" data-mobile-panel="life">
+        <h2 class="m-section-title">了解更多的我</h2>
+        <div class="m-life-list">
+          <article class="m-life-card" data-m-gallery="dance">
+            <img src="picture/Dance/5.jpg" alt="舞蹈照片">
+            <span class="m-life-hint">点击查看更多</span>
+            <div class="m-life-text"><h3>舞蹈业余爱好者</h3><p>30 岁+开始 0 基础学习中国舞，学会用身体表达。古典舞、民族舞、现代舞和当代舞都很爱。</p></div>
+          </article>
+          <div class="m-gallery" data-m-gallery-panel="dance">
+            <img src="picture/Dance/2.jpg" alt=""><img src="picture/Dance/1.jpg" alt=""><img src="picture/Dance/3.jpg" alt=""><img src="picture/Dance/4.jpg" alt=""><img src="picture/Dance/5.jpg" alt="">
+          </div>
+          <article class="m-life-card" data-m-gallery="run">
+            <img src="picture/Marathon/1.jpg" alt="马拉松照片">
+            <span class="m-life-hint">点击查看更多</span>
+            <div class="m-life-text"><h3>马拉松完赛人</h3><p>以前 800 米都跑不下来的人，2025 年开始跑步，2026 年完成首半马。慢慢来，也可以抵达。</p></div>
+          </article>
+          <div class="m-gallery" data-m-gallery-panel="run">
+            <img src="picture/Marathon/1.jpg" alt=""><img src="picture/Marathon/2.jpg" alt=""><img src="picture/Marathon/3.jpg" alt=""><img src="picture/Marathon/4.jpg" alt=""><img src="picture/Marathon/8.jpg" alt="">
+          </div>
+          <article class="m-life-card" data-m-gallery="cat">
+            <img src="picture/Cats/3.jpg" alt="猫咪照片">
+            <span class="m-life-hint">点击查看更多</span>
+            <div class="m-life-text"><h3>流浪猫守护者</h3><p>Cat is always right.<br>记录遇见的猫，也记录生活里柔软、真实的一面。</p></div>
+          </article>
+          <div class="m-gallery" data-m-gallery-panel="cat">
+            <img src="picture/Cats/3.jpg" alt=""><img src="picture/Cats/2.jpg" alt=""><img src="picture/Cats/4.jpg" alt=""><img src="picture/Cats/5.jpg" alt="">
+          </div>
+          <article class="m-life-card" data-m-gallery="ancient">
+            <img src="picture/Ancient-style%20portrait/1.jpg" alt="古风摄影照片">
+            <span class="m-life-hint">点击查看更多</span>
+            <div class="m-life-text"><h3>古风摄影爱好者</h3><p>清清如我，淡淡着色。<br>中国古典的美，长在每一位中国女性的身上。</p></div>
+          </article>
+          <div class="m-gallery" data-m-gallery-panel="ancient">
+            <img src="picture/Ancient-style%20portrait/1.jpg" alt=""><img src="picture/Ancient-style%20portrait/2.jpg" alt=""><img src="picture/Ancient-style%20portrait/3.jpg" alt=""><img src="picture/Ancient-style%20portrait/4.jpg" alt=""><img src="picture/Ancient-style%20portrait/5.jpg" alt="">
+          </div>
+        </div>
+      </section>
+
+      <section class="m-panel" data-mobile-panel="about">
+        <h2 class="m-section-title about-title">关于我</h2>
+        <article class="m-about-brief">
+          <h3>我相信，<mark>洞察人</mark>和<mark>做成事</mark>，都需要耐心。</h3>
+          <p>过去我在基金平台会员体系、财经大 V 内容生态、活动增长和金融产品获客中打磨运营能力。现在，我把这些经验带进 AI 学习里，尝试从一个具体问题开始，做出更贴近真实人的产品。</p>
+        </article>
+        <h2 class="m-section-title">社交媒体</h2>
+        <p class="m-intro">可以通过我的社交媒体找到我 :)</p>
+        <p class="m-email">当然，也可以通过邮箱与我联系<br>angell0508@126.com</p>
+        <div class="m-social">
+          <article class="m-card m-social-card" tabindex="0"><div><h3>小红书</h3><p>日常记录｜@周小猪<br>生活、学习、思考和一点点自我更新。</p></div><img src="picture/redbook.jpg" alt="小红书二维码卡片"></article>
+          <article class="m-card m-social-card" tabindex="0"><div><h3>视频号</h3><p>舞蹈日记｜@周小猪爱吃肉<br>记录舞蹈练习，也记录身体慢慢打开的过程。</p></div><img src="picture/wechat_video.jpg" alt="视频号二维码卡片"></article>
+          <article class="m-card m-social-card" tabindex="0"><div><h3>小宇宙</h3><p>AI 实践日记｜@小猪的AI实践日记<br>把探索路上的尝试、复盘和灵感说给你听。</p></div><img src="picture/radio.jpg" alt="小宇宙二维码卡片"></article>
+        </div>
+      </section>
+    </main>
+
+    <nav class="m-tabbar" aria-label="移动端底部导航">
+      <button class="m-tab active" type="button" data-mobile-tab="home"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fill-soft" d="M5 11.2 12 5l7 6.2v7.3H5z"/><path d="M4.5 11.4 12 4.8l7.5 6.6"/><path d="M6.3 10.6v8.2h4.1v-5h3.2v5h4.1v-8.2"/></svg><span>首页</span></button>
+      <button class="m-tab" type="button" data-mobile-tab="works"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="fill-soft" x="5" y="6" width="14" height="12" rx="1.8"/><rect x="5" y="6" width="14" height="12" rx="1.8"/><circle cx="9" cy="10" r="1.2"/><path d="m7.3 16 3.8-4 2.3 2.4 1.5-1.6 2.1 3.2"/></svg><span>作品</span></button>
+      <button class="m-tab" type="button" data-mobile-tab="life"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="fill-soft" d="M12 20s5.5-4.4 5.5-9a5.5 5.5 0 1 0-11 0c0 4.6 5.5 9 5.5 9z"/><path d="M12 20s5.5-4.4 5.5-9a5.5 5.5 0 1 0-11 0c0 4.6 5.5 9 5.5 9z"/><circle cx="12" cy="11" r="2"/></svg><span>生活</span></button>
+      <button class="m-tab" type="button" data-mobile-tab="about"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="fill-soft" cx="12" cy="12" r="8.2"/><circle cx="12" cy="9.4" r="3"/><path d="M6.8 18.2c1-2.7 2.8-4 5.2-4s4.2 1.3 5.2 4"/><circle cx="12" cy="12" r="8.2"/></svg><span>关于我</span></button>
+    </nav>
+  </div>
+
+  <div class="page">
+    <header class="topbar">
+      <nav class="nav wrap" aria-label="主导航">
+        <a class="brand" href="#top" aria-label="回到首页"><span class="seal">周</span><span>周彦君 · 小猪</span></a>
+        <div class="navlinks">
+          <a href="#about">我是谁</a>
+          <a href="#experience">工作背景</a>
+          <a href="#life">生活侧面</a>
+          <a href="#works">作品</a>
+          <a href="#contact">联系</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">Operator / Vibe Coder in Progress</div>
+            <h1>你好，<br>我是周彦君</h1>
+            <div class="hero-subtitle" aria-live="polite"><span id="typewriter"></span><span class="cursor">|</span></div>
+            <p class="intro">商科教育背景，前产品经理，现金融行业运营人<br>正在从 0 编程背景开始学习成为 Vibe Coder<br>我想用 AI 和代码，把生活与工作里的用户洞察，变成真正可用的小工具</p>
+            <div class="tags" aria-label="个人关键词">
+              <span class="tag">9 年金融用户运营</span>
+              <span class="tag">内容生态 & 活动增长</span>
+              <span class="tag">AI 学习转型</span>
+              <span class="tag">温柔但有力量</span>
+            </div>
+            <div class="hero-actions">
+              <a class="btn primary" href="#works">看我的作品</a>
+              <a class="btn" href="#life">了解更多的我</a>
+            </div>
+          </div>
+
+          <div class="portrait-stage" id="portraitStage">
+            <div class="portrait-card">
+              <img id="portrait" src="picture/Personal%20image/1.jpg" alt="周彦君个人形象照">
+              <div class="photo-switch" aria-label="切换个人形象照">
+                <button class="dot active" type="button" title="形象照一" data-src="picture/Personal%20image/1.jpg"></button>
+                <button class="dot" type="button" title="形象照二" data-src="picture/Personal%20image/3.jpg"></button>
+              </div>
+            </div>
+            <div class="portrait-note">长期主义者，<br>也是人生体验派</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-band" id="about">
+        <div class="wrap about-grid reveal">
+          <p class="quote">我相信，<mark>洞察人</mark>和<mark>做成事</mark>，都需要耐心。</p>
+          <p class="section-copy">过去我在基金平台会员体系、财经大 V 内容生态、活动增长和金融产品获客中打磨运营能力。现在，我把这些经验带进 AI 与代码学习里，尝试从一个具体问题开始，做出更贴近真实人的产品。</p>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Professional Background</div>
+            <h2>工作背景</h2>
+            <p class="section-copy">9年时间，2段经历，1条主线：理解用户、整合资源、把想法推进到真实结果。</p>
+          </div>
+          <div class="experience-grid">
+            <button class="experience-card reveal" type="button" data-exp="lufund">
+              <span class="card-num">01</span>
+              <h3>上海陆金所基金销售有限公司<span class="inline-badge">在职</span></h3>
+              <div class="role">营销部｜运营经理</div>
+              <p class="card-text">基金平台会员全生命周期运营、财经大 V 内容生态及平台活动运营。</p>
+            </button>
+            <button class="experience-card reveal" type="button" data-exp="ctrip">
+              <span class="card-num">02</span>
+              <h3>携程金融</h3>
+              <div class="role">信用卡业务部｜产品经理</div>
+              <p class="card-text">联名信用卡产品设计、活动运营及线上获客渠道，推动申卡转化。</p>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="doing" id="doing">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Now Building</div>
+            <h2>我正在做什么</h2>
+          </div>
+          <div class="doing-grid">
+            <article class="doing-item reveal">
+              <h3>学习 Vibe Coding</h3>
+              <p>从 0 编程背景开始，借助 AI 学习产品原型、网页、小工具和自动化流程，把“我想做”一点点变成“我做出来了”。</p>
+            </article>
+            <article class="doing-item reveal">
+              <h3>开发「折学家」</h3>
+              <p>一个面向骨折患者的康复陪伴工具，关注恢复过程中的记录、提醒、情绪支持和阶段性反馈。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="life">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">More About Me</div>
+            <h2>了解更多的我</h2>
+            <p class="section-copy">职业之外，那些让我保持柔软、笃定和好奇的生活片段。</p>
+          </div>
+          <div class="life-strip" aria-label="生活照片横向滑动">
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img src="picture/Dance/2.jpg" alt="舞蹈照片">
+                <div class="life-caption">
+                  <h3>舞蹈业务爱好者</h3>
+                  <p>30 岁+开始 0 基础学习中国舞，学会用身体表达。古典舞、民族舞、现代舞和当代舞都很爱。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="舞蹈照片合集">
+                <img class="active" src="picture/Dance/2.jpg" alt="舞蹈照片 2">
+                <img src="picture/Dance/1.jpg" alt="舞蹈照片 1">
+                <img src="picture/Dance/3.jpg" alt="舞蹈照片 3">
+                <img src="picture/Dance/4.jpg" alt="舞蹈照片 4">
+                <img src="picture/Dance/5.jpg" alt="舞蹈照片 5">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img class="focus-left" src="picture/Marathon/1.jpg" alt="马拉松照片">
+                <div class="life-caption">
+                  <h3>马拉松完赛人</h3>
+                  <p>以前 800 米都跑不下来的人，2025 年开始跑步，2026 年完成首半马。慢慢来，也可以抵达。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="马拉松照片合集">
+                <img class="active" src="picture/Marathon/1.jpg" alt="马拉松照片 1" data-focus="left">
+                <img src="picture/Marathon/2.jpg" alt="马拉松照片 2">
+                <img src="picture/Marathon/3.jpg" alt="马拉松照片 3">
+                <img src="picture/Marathon/4.jpg" alt="马拉松照片 4">
+                <img src="picture/Marathon/5.jpg" alt="马拉松照片 5">
+                <img src="picture/Marathon/6.jpg" alt="马拉松照片 6">
+                <img src="picture/Marathon/7.jpg" alt="马拉松照片 7">
+                <img src="picture/Marathon/8.jpg" alt="马拉松照片 8">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img class="focus-right" src="picture/Cats/3.jpg" alt="猫咪照片">
+                <div class="life-caption">
+                  <h3>流浪猫守护者</h3>
+                  <p>Cat is always right.<br>记录遇见的猫，也记录生活里柔软、真实的一面。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="猫咪照片合集">
+                <img class="active" src="picture/Cats/3.jpg" alt="猫咪照片 3" data-focus="right">
+                <img src="picture/Cats/2.jpg" alt="猫咪照片 2">
+                <img src="picture/Cats/4.jpg" alt="猫咪照片 4">
+                <img src="picture/Cats/5.jpg" alt="猫咪照片 5">
+              </div>
+            </article>
+            <article class="life-card reveal">
+              <div class="life-main" role="button" tabindex="0" aria-expanded="false">
+                <img src="picture/Ancient-style%20portrait/1.jpg" alt="古风摄影照片">
+                <div class="life-caption">
+                  <h3>古风摄影爱好者</h3>
+                  <p>清清如我，淡淡着色。<br>中国古典的美，长在每一位中国女性的身上。</p>
+                </div>
+              </div>
+              <div class="life-gallery" aria-label="古风摄影照片合集">
+                <img class="active" src="picture/Ancient-style%20portrait/1.jpg" alt="古风摄影照片 1">
+                <img src="picture/Ancient-style%20portrait/2.jpg" alt="古风摄影照片 2">
+                <img src="picture/Ancient-style%20portrait/3.jpg" alt="古风摄影照片 3">
+                <img src="picture/Ancient-style%20portrait/4.jpg" alt="古风摄影照片 4">
+                <img src="picture/Ancient-style%20portrait/5.jpg" alt="古风摄影照片 5">
+                <img src="picture/Ancient-style%20portrait/6.jpg" alt="古风摄影照片 6">
+                <img src="picture/Ancient-style%20portrait/7.jpg" alt="古风摄影照片 7">
+                <img src="picture/Ancient-style%20portrait/8.jpg" alt="古风摄影照片 8">
+                <img src="picture/Ancient-style%20portrait/9.jpg" alt="古风摄影照片 9">
+              </div>
+            </article>
+          </div>
+          <div class="life-gallery-panel" id="lifeGalleryPanel" aria-live="polite">
+            <div class="life-gallery-track" id="lifeGalleryTrack"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="works">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Selected Works</div>
+            <h2>我的作品</h2>
+          </div>
+          <div class="work-grid">
+            <article class="work-card reveal">
+              <span class="card-num">Product 01</span>
+              <h3>折学家</h3>
+              <p class="card-text">一个面向骨折患者的康复陪伴工具，孵化中，预计 2026 年 Q3 上线。</p>
+              <span class="status">Applicaiton Program</span>
+            </article>
+            <article class="work-card reveal">
+              <span class="card-num">Journal 02</span>
+              <h3>AI 实践日记</h3>
+              <p class="card-text">记录0编程背景小白成为Vibe Coder的学习过程、真实踩坑和产品思考。</p>
+              <span class="status">Recording</span>
+            </article>
+            <article class="work-card reveal">
+              <span class="card-num">Next 03</span>
+              <h3>敬请期待</h3>
+              <p class="card-text">更多灵感发芽中。把细小但真实的问题，做成可以被使用的答案。</p>
+              <span class="status">Coming Soon</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="wrap">
+          <div class="section-head reveal">
+            <div class="kicker">Social & Contact</div>
+            <h2>社交媒体</h2>
+            <p class="section-copy">可以通过我的社交媒体找到我 :)</p>
+          </div>
+          <p class="contact-email reveal">当然，也可以通过邮箱与我联系 <a href="mailto:angell0508@126.com">angell0508@126.com</a></p>
+          <div class="social-grid">
+            <a class="social-card reveal" href="#" aria-label="小红书 周小猪">
+              <div class="qr"><img src="picture/redbook.jpg" alt="小红书二维码"></div>
+              <div>
+                <h3>小红书</h3>
+                <div class="role">日常记录｜@周小猪</div>
+                <p>生活、学习、思考和一点点自我更新。</p>
+              </div>
+            </a>
+            <a class="social-card reveal" href="#" aria-label="视频号 周小猪爱吃肉">
+              <div class="qr"><img src="picture/wechat_video.jpg" alt="视频号二维码"></div>
+              <div>
+                <h3>视频号</h3>
+                <div class="role">舞蹈日记｜@周小猪爱吃肉</div>
+                <p>记录舞蹈练习，也记录身体慢慢打开的过程。</p>
+              </div>
+            </a>
+            <a class="social-card reveal" href="#" aria-label="小宇宙 小猪的AI实践日记">
+              <div class="qr"><img src="picture/radio.jpg" alt="小宇宙二维码"></div>
+              <div>
+                <h3>小宇宙</h3>
+                <div class="role">AI 实践日记｜@小猪的AI实践日记</div>
+                <p>把探索路上的尝试、复盘和灵感说给你听。</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">© 2026 周彦君 · 小猪。愿每一个慢慢来的瞬间，都在靠近答案。</div>
+    </footer>
+  </div>
+
+  <div class="modal" id="expModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel">
+      <div class="modal-body">
+        <div class="modal-top">
+          <div>
+            <div class="kicker" id="modalKicker">Experience</div>
+            <h3 id="modalTitle"></h3>
+            <div class="role" id="modalRole"></div>
+          </div>
+          <button class="close" type="button" aria-label="关闭弹窗">×</button>
+        </div>
+        <ul id="modalList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const typeTarget = document.querySelector("#typewriter");
+    const typeText = "也可以叫我小猪";
+    let typeIndex = 0;
+    const type = () => {
+      typeTarget.textContent = typeText.slice(0, typeIndex);
+      typeIndex += 1;
+      if (typeIndex <= typeText.length) window.setTimeout(type, 58);
+    };
+    type();
+
+    const portrait = document.querySelector("#portrait");
+    document.querySelectorAll(".dot").forEach((dot) => {
+      dot.addEventListener("click", () => {
+        document.querySelectorAll(".dot").forEach((item) => item.classList.remove("active"));
+        dot.classList.add("active");
+        portrait.style.opacity = "0";
+        window.setTimeout(() => {
+          portrait.src = dot.dataset.src;
+          portrait.style.opacity = "1";
+        }, 180);
+      });
+    });
+
+    const stage = document.querySelector("#portraitStage");
+    stage.addEventListener("pointermove", (event) => {
+      const rect = stage.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      stage.querySelector(".portrait-card").style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+    });
+    stage.addEventListener("pointerleave", () => {
+      stage.querySelector(".portrait-card").style.transform = "";
+    });
+
+    const experiences = {
+      lufund: {
+        title: "上海陆金所基金销售有限公司",
+        role: "营销部｜运营经理",
+        items: [
+          "负责基金平台会员全生命周期运营，围绕新客、活跃、留存与权益感知设计运营动作。",
+          "从 0 到 1 搭建会员等级与权益体系，让平台服务更有层次，也更容易被用户理解。",
+          "搭建财经大 V 合作体系，连接内容、专家影响力与平台活动运营。",
+          "长期处理金融用户沟通、内容表达和增长目标之间的平衡。"
+        ]
+      },
+      ctrip: {
+        title: "携程金融",
+        role: "信用卡业务部｜产品经理",
+        items: [
+          "参与携程联名信用卡产品设计、活动运营及线上获客渠道建设。",
+          "通过申卡流程优化、场景化营销和群分触达策略，推动申卡进件转化率提升。",
+          "在旅行消费场景中理解用户需求，把金融产品表达得更轻、更清楚。",
+          "积累了产品协作、渠道运营和转化链路分析经验。"
+        ]
+      }
+    };
+
+    const modal = document.querySelector("#expModal");
+    const modalTitle = document.querySelector("#modalTitle");
+    const modalRole = document.querySelector("#modalRole");
+    const modalList = document.querySelector("#modalList");
+    const closeModal = () => modal.classList.remove("open");
+
+    document.querySelectorAll("[data-exp]").forEach((card) => {
+      card.addEventListener("click", () => {
+        const data = experiences[card.dataset.exp];
+        modalTitle.textContent = data.title;
+        modalRole.textContent = data.role;
+        modalList.innerHTML = data.items.map((item) => `<li>${item}</li>`).join("");
+        modal.classList.add("open");
+      });
+    });
+    document.querySelector(".close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeModal();
+    });
+
+    const lifePanel = document.querySelector("#lifeGalleryPanel");
+    const lifeTrack = document.querySelector("#lifeGalleryTrack");
+    let activeLifeCard = null;
+
+    document.querySelectorAll(".life-card").forEach((card) => {
+      const main = card.querySelector(".life-main");
+      const mainImg = main.querySelector("img");
+      const sourceThumbs = [...card.querySelectorAll(".life-gallery img")];
+      const closePanel = () => {
+        lifePanel.classList.remove("open");
+        card.classList.remove("expanded");
+        main.setAttribute("aria-expanded", "false");
+        if (activeLifeCard === card) activeLifeCard = null;
+      };
+
+      const openPanel = () => {
+        document.querySelectorAll(".life-card.expanded").forEach((item) => {
+          item.classList.remove("expanded");
+          item.querySelector(".life-main").setAttribute("aria-expanded", "false");
+        });
+
+        lifeTrack.innerHTML = "";
+        sourceThumbs.forEach((thumb) => {
+          const image = thumb.cloneNode(true);
+          image.addEventListener("click", () => {
+            mainImg.src = image.src;
+            mainImg.alt = image.alt;
+            mainImg.classList.toggle("focus-left", image.dataset.focus === "left");
+            mainImg.classList.toggle("focus-right", image.dataset.focus === "right");
+            lifeTrack.querySelectorAll("img").forEach((item) => item.classList.remove("active"));
+            image.classList.add("active");
+          });
+          lifeTrack.appendChild(image);
+        });
+
+        card.classList.add("expanded");
+        main.setAttribute("aria-expanded", "true");
+        activeLifeCard = card;
+        requestAnimationFrame(() => lifePanel.classList.add("open"));
+      };
+
+      const togglePanel = () => {
+        if (activeLifeCard === card && lifePanel.classList.contains("open")) {
+          closePanel();
+        } else {
+          openPanel();
+        }
+      };
+
+      main.addEventListener("click", togglePanel);
+      main.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          togglePanel();
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+
+    const mobileTabs = document.querySelectorAll("[data-mobile-tab]");
+    const mobilePanels = document.querySelectorAll("[data-mobile-panel]");
+    const mobileMenuButton = document.querySelector(".m-menu");
+    const mobileMenu = document.querySelector("#mobileMenu");
+    const mobileMenuItems = document.querySelectorAll("[data-mobile-menu]");
+    const showMobilePanel = (name) => {
+      mobilePanels.forEach((panel) => panel.classList.toggle("active", panel.dataset.mobilePanel === name));
+      mobileTabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.mobileTab === name));
+      mobileMenuItems.forEach((item) => item.classList.toggle("active", item.dataset.mobileMenu === name));
+      mobileMenu?.classList.remove("open");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+      if (window.matchMedia("(max-width: 719px)").matches) window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    mobileTabs.forEach((tab) => {
+      tab.addEventListener("click", () => showMobilePanel(tab.dataset.mobileTab));
+    });
+    document.querySelectorAll("[data-mobile-jump]").forEach((button) => {
+      button.addEventListener("click", () => showMobilePanel(button.dataset.mobileJump));
+    });
+    mobileMenuButton?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const open = mobileMenu.classList.toggle("open");
+      mobileMenuButton.setAttribute("aria-expanded", String(open));
+    });
+    mobileMenuItems.forEach((item) => {
+      item.addEventListener("click", () => showMobilePanel(item.dataset.mobileMenu));
+    });
+    document.addEventListener("click", (event) => {
+      if (!mobileMenu?.classList.contains("open")) return;
+      if (mobileMenu.contains(event.target) || mobileMenuButton.contains(event.target)) return;
+      mobileMenu.classList.remove("open");
+      mobileMenuButton.setAttribute("aria-expanded", "false");
+    });
+
+    const mobilePortrait = document.querySelector("#mPortrait");
+    document.querySelectorAll("[data-mobile-photo]").forEach((dot) => {
+      dot.addEventListener("click", (event) => {
+        event.stopPropagation();
+        mobilePortrait.src = dot.dataset.mobilePhoto;
+        mobilePortrait.classList.toggle("is-headshot", dot.dataset.headshot === "true");
+        document.querySelectorAll("[data-mobile-photo]").forEach((item) => item.classList.remove("active"));
+        dot.classList.add("active");
+      });
+    });
+    const initialMobilePanel = location.hash.replace("#m-", "");
+    if (["home", "works", "life", "about"].includes(initialMobilePanel)) {
+      showMobilePanel(initialMobilePanel);
+    }
+
+    document.querySelectorAll("[data-m-gallery]").forEach((card) => {
+      const key = card.dataset.mGallery;
+      const panel = document.querySelector(`[data-m-gallery-panel="${key}"]`);
+      const cover = card.querySelector("img");
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".m-gallery.open").forEach((item) => {
+          if (item !== panel) item.classList.remove("open");
+        });
+        panel.classList.toggle("open");
+      });
+      panel.querySelectorAll("img").forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+          cover.src = thumb.src;
+          panel.querySelectorAll("img").forEach((item) => item.classList.remove("active"));
+          thumb.classList.add("active");
+        });
+      });
+    });
+
+    document.querySelectorAll(".m-social-card").forEach((card) => {
+      const toggleZoom = () => {
+        document.querySelectorAll(".m-social-card.zoomed").forEach((item) => {
+          if (item !== card) item.classList.remove("zoomed");
+        });
+        card.classList.toggle("zoomed");
+      };
+      card.addEventListener("click", toggleZoom);
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleZoom();
+        }
+      });
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") document.querySelectorAll(".m-social-card.zoomed").forEach((item) => item.classList.remove("zoomed"));
+    });
+  </script>
+</body>
+</html>
