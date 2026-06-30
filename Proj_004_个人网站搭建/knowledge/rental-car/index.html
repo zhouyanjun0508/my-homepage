@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>租车行业调研 | 从车辆库存到旅行自由网络</title>
+  <style>
+    :root {
+      --paper: oklch(0.97 0.018 88);
+      --paper-2: oklch(0.93 0.026 86);
+      --ink: oklch(0.20 0.032 161);
+      --muted: oklch(0.45 0.025 165);
+      --pine: oklch(0.34 0.070 159);
+      --pine-2: oklch(0.25 0.054 164);
+      --moss: oklch(0.56 0.080 135);
+      --clay: oklch(0.62 0.122 47);
+      --stone: oklch(0.70 0.020 82);
+      --line: color-mix(in oklch, var(--pine) 24%, white);
+      --white: oklch(1 0 0);
+      --shadow: 0 28px 80px rgba(18, 39, 32, 0.16);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.92)),
+        radial-gradient(circle at 12% 8%, rgba(166, 121, 72, 0.18), transparent 28rem),
+        var(--paper);
+      font-family: "Noto Sans CJK SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+      line-height: 1.75;
+      letter-spacing: 0;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      background: #18251f;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(10, 25, 19, 0.80), rgba(10, 25, 19, 0.36) 48%, rgba(10, 25, 19, 0.08)),
+        linear-gradient(0deg, rgba(10, 25, 19, 0.78), transparent 46%),
+        url("assets/hero-generated-roadtrip.png");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.02);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 18vh;
+      background: linear-gradient(180deg, transparent, var(--paper));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 120px 0 96px;
+      color: var(--white);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: color-mix(in oklch, var(--white) 82%, var(--moss));
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1, h2, h3 {
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", "Songti SC", "SimSun", Georgia, serif;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+      margin: 0;
+    }
+
+    .hero h1 {
+      max-width: 920px;
+      margin-top: 26px;
+      font-size: clamp(46px, 8vw, 104px);
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+      margin-top: 30px;
+      font-size: clamp(17px, 2vw, 22px);
+      color: color-mix(in oklch, var(--white) 82%, var(--paper-2));
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .btn {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 999px;
+      color: var(--white);
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(12px);
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.64);
+      background: rgba(255,255,255,0.18);
+    }
+
+    .btn.primary {
+      background: var(--clay);
+      border-color: var(--clay);
+      color: #1b130d;
+      font-weight: 700;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: color-mix(in oklch, var(--paper) 88%, transparent);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 68px;
+    }
+
+    .brand {
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      font-weight: 700;
+      color: var(--pine-2);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav a {
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .nav a:hover, .nav a.active {
+      color: var(--pine-2);
+      background: color-mix(in oklch, var(--moss) 15%, white);
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    section {
+      scroll-margin-top: 92px;
+      padding: 84px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.9fr) minmax(280px, 1.1fr);
+      gap: 44px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(34px, 5vw, 68px);
+      color: var(--pine-2);
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      text-wrap: pretty;
+    }
+
+    .core-question {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .question-panel {
+      padding: clamp(26px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--white) 74%, var(--paper));
+      box-shadow: var(--shadow);
+    }
+
+    .question-panel h2 {
+      font-size: clamp(34px, 5vw, 60px);
+      color: var(--pine-2);
+      margin-bottom: 20px;
+    }
+
+    .question-panel .big {
+      font-size: clamp(22px, 3vw, 36px);
+      line-height: 1.28;
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      color: var(--pine);
+    }
+
+    .fact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .fact {
+      min-height: 168px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.62);
+    }
+
+    .fact strong {
+      display: block;
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      font-size: 32px;
+      line-height: 1;
+      color: var(--clay);
+      margin-bottom: 14px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .map {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .map a {
+      min-height: 220px;
+      padding: 22px;
+      background: color-mix(in oklch, var(--white) 82%, var(--paper));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .map a:hover {
+      background: color-mix(in oklch, var(--moss) 18%, white);
+      transform: translateY(-2px);
+    }
+
+    .map small {
+      color: var(--clay);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .map b {
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      font-size: 25px;
+      line-height: 1.18;
+      color: var(--pine-2);
+    }
+
+    .map p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: rgba(255,255,255,0.64);
+      color: var(--muted);
+      cursor: pointer;
+      min-height: 44px;
+      font-size: 14px;
+    }
+
+    .tab-btn.active {
+      color: var(--white);
+      background: var(--pine);
+      border-color: var(--pine);
+    }
+
+    .panel {
+      display: none;
+      grid-template-columns: minmax(260px, 0.72fr) minmax(320px, 1.28fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .panel.active {
+      display: grid;
+    }
+
+    .portrait {
+      padding: 28px;
+      border-radius: var(--radius);
+      color: var(--white);
+      background:
+        linear-gradient(150deg, rgba(255,255,255,0.14), transparent),
+        var(--pine-2);
+      min-height: 390px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .portrait h3 {
+      font-size: clamp(30px, 4vw, 50px);
+      margin-bottom: 16px;
+    }
+
+    .portrait p {
+      color: color-mix(in oklch, var(--white) 72%, var(--paper));
+      margin: 0;
+    }
+
+    .portrait .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .read-link {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: var(--white);
+    }
+
+    .logic {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .logic-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--white) 76%, var(--paper));
+    }
+
+    .logic-card h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: var(--pine-2);
+    }
+
+    .logic-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .journey {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 34px;
+      align-items: start;
+    }
+
+    .road-sign {
+      position: sticky;
+      top: 92px;
+      padding: 28px;
+      background: var(--pine);
+      color: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .road-sign h3 {
+      font-size: 34px;
+      margin-bottom: 16px;
+    }
+
+    .road-sign p {
+      color: color-mix(in oklch, var(--white) 74%, var(--paper));
+      margin: 0;
+    }
+
+    .steps {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 18px;
+      padding: 22px;
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .step .num {
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      font-size: 44px;
+      line-height: 1;
+      color: var(--clay);
+    }
+
+    .step h3 {
+      font-size: 23px;
+      color: var(--pine-2);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .matrix-card {
+      padding: 24px;
+      min-height: 300px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, white 82%, var(--paper));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .matrix-card h3 {
+      font-size: 28px;
+      color: var(--pine-2);
+      margin-bottom: 12px;
+    }
+
+    .matrix-card ul {
+      padding-left: 18px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .matrix-card li + li {
+      margin-top: 8px;
+    }
+
+    .quote-band {
+      margin-top: 28px;
+      padding: 34px;
+      border-radius: var(--radius);
+      color: var(--white);
+      background:
+        linear-gradient(120deg, rgba(210, 139, 78, 0.82), rgba(47, 84, 66, 0.92)),
+        var(--pine);
+    }
+
+    .quote-band p {
+      max-width: 880px;
+      margin: 0;
+      font-family: "Iowan Old Style", "Noto Serif CJK SC", serif;
+      font-size: clamp(26px, 4vw, 52px);
+      line-height: 1.18;
+    }
+
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .source-list a, .source-list div {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.58);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .source-list a:hover {
+      color: var(--pine-2);
+      background: color-mix(in oklch, var(--moss) 14%, white);
+    }
+
+    footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0 70px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    .back-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: color-mix(in oklch, var(--paper) 88%, white);
+      color: var(--pine-2);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 12px 30px rgba(18, 39, 32, 0.15);
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      .section-head,
+      .core-question,
+      .panel.active,
+      .journey {
+        grid-template-columns: 1fr;
+      }
+
+      .map,
+      .matrix,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+
+      .logic,
+      .fact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .road-sign {
+        position: static;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-inner {
+        padding: 90px 0 78px;
+      }
+
+      section {
+        padding: 56px 0;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .btn, .tab-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="kicker">Car Rental Industry Research 2026</div>
+      <h1>从车辆库存到旅行自由网络</h1>
+      <p class="hero-copy">围绕一个核心问题：租车公司怎样把一台台持续折旧的车，变成用户愿意信任、愿意复购、还能持续赚钱的旅行基础设施？</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#question">进入核心问题</a>
+        <a class="btn" href="#perspectives">切换三种视角</a>
+        <a class="btn" href="#reports">打开三份报告</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">租车行业调研</a>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#question">核心问题</a>
+        <a href="#map">行业地图</a>
+        <a href="#perspectives">三种视角</a>
+        <a href="#journey">体验链路</a>
+        <a href="#operator">经营抓手</a>
+        <a href="#reports">报告与来源</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <section id="question">
+      <div class="core-question">
+        <div class="question-panel">
+          <h2>核心问题</h2>
+          <p class="big">租车企业能不能把“会折旧的车辆”经营成“可被信任的旅行自由网络”？</p>
+        </div>
+        <div class="fact-grid" aria-label="核心事实">
+          <div class="fact">
+            <strong>65亿</strong>
+            <span>2025年中国国内出游人次约65亿，旅游消费仍是租车需求的最大底层推力。</span>
+          </div>
+          <div class="fact">
+            <strong>2026-2028</strong>
+            <span>小微型客车租赁三年行动方案把电子合同、异地还车、信用、押金、纠纷处理纳入规范化议程。</span>
+          </div>
+          <div class="fact">
+            <strong>千亿美元级</strong>
+            <span>全球租车市场按不同口径均处于千亿美元级，机场、旅游、企业、订阅和共享模式共同构成市场。</span>
+          </div>
+          <div class="fact">
+            <strong>15分钟</strong>
+            <span>网页叙事用“落地15分钟开走合适的车”作为体验目标，把车队、门店、保险、押金统一进一个产品指标。</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="map">
+      <div class="section-head">
+        <h2>行业地图</h2>
+        <p>租车不是单一的门店生意。它把旅游、汽车金融、本地运营、风控保险和数字流量叠在一起。任何一个环节失真，都会吞掉利润或信任。</p>
+      </div>
+      <div class="map">
+        <a href="#perspectives">
+          <small>01 Lens</small>
+          <b>资产效率</b>
+          <p>每台车不是库存，而是一组可售小时。折旧、残值、空驶和调度决定利润。</p>
+        </a>
+        <a href="#journey">
+          <small>02 Journey</small>
+          <b>旅行确定性</b>
+          <p>用户买的不是车，而是陌生城市里的行动半径、空间和可控感。</p>
+        </a>
+        <a href="#operator">
+          <small>03 Operator</small>
+          <b>低错误率系统</b>
+          <p>车况、押金、事故、违章、维修、异地还车，都是复购前的信任测试。</p>
+        </a>
+        <a href="#reports">
+          <small>04 Evidence</small>
+          <b>数据与边界</b>
+          <p>订单增长不能替代现金流，新能源叙事不能替代残值和维修模型。</p>
+        </a>
+      </div>
+    </section>
+
+    <section id="perspectives">
+      <div class="section-head">
+        <h2>三种商业镜片</h2>
+        <p>同一个行业，马斯克会先算资产极限，乔布斯会重构用户体验，芒格会先列失败清单。三者合在一起，形成一个更完整的经营判断。</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="视角切换">
+        <button class="tab-btn active" type="button" data-tab="musk">马斯克：先算可售小时</button>
+        <button class="tab-btn" type="button" data-tab="jobs">乔布斯：先砍体验焦虑</button>
+        <button class="tab-btn" type="button" data-tab="munger">芒格：先避免扩张死</button>
+      </div>
+
+      <article class="panel active" id="panel-musk">
+        <div class="portrait">
+          <div>
+            <h3>先算</h3>
+            <p>租车行业不是“车越多越好”，而是“车辆小时被卖出去的效率越高越好”。核心公式是可用车辆小时、需求匹配效率、信任转化率和折旧损耗。</p>
+          </div>
+          <div class="link-row">
+            <a class="read-link" href="租车行业调研_马斯克视角.md">阅读完整报告</a>
+          </div>
+        </div>
+        <div class="logic">
+          <div class="logic-card">
+            <h4>第一性原理</h4>
+            <p>用户真正购买的是行动半径，不是车钥匙。车型、保险、取还点和补能路线都应从行程反推。</p>
+          </div>
+          <div class="logic-card">
+            <h4>白痴指数</h4>
+            <p>把用户支付的自由价值与车辆真实可售小时成本相比，找出流程摩擦、空驶和信任损耗。</p>
+          </div>
+          <div class="logic-card">
+            <h4>垂直整合</h4>
+            <p>不必造车，但必须控制采购残值、订单数据、验车信任、补能维修等关键闭环。</p>
+          </div>
+          <div class="logic-card">
+            <h4>五步算法</h4>
+            <p>先删除柜台重复确认、保险强推、黑箱押金和模糊车型承诺，再谈自动化调度。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel" id="panel-jobs">
+        <div class="portrait">
+          <div>
+            <h3>做成产品</h3>
+            <p>伟大的租车产品不是库存表，而是旅行助理。它应该让用户在落地前就知道：什么车适合我、风险在哪里、几分钟能开走。</p>
+          </div>
+          <div class="link-row">
+            <a class="read-link" href="租车行业调研_乔布斯视角.md">阅读完整报告</a>
+          </div>
+        </div>
+        <div class="logic">
+          <div class="logic-card">
+            <h4>一句话定义</h4>
+            <p>“落地15分钟，开上适合这趟旅程的车。”这句话比“全国连锁租车平台”更能倒逼产品。</p>
+          </div>
+          <div class="logic-card">
+            <h4>砍掉术语</h4>
+            <p>同组车型、预授权、基础保障、不计免赔，都要翻译为用户能理解的责任和时间线。</p>
+          </div>
+          <div class="logic-card">
+            <h4>关键时刻</h4>
+            <p>搜车、取车、途中、还车四个时刻决定体验记忆。最后十分钟往往决定复购。</p>
+          </div>
+          <div class="logic-card">
+            <h4>场景品牌</h4>
+            <p>亲子、户外、商务、年轻旅行、新能源体验，应该是不同产品系统，不只是营销标签。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel" id="panel-munger">
+        <div class="portrait">
+          <div>
+            <h3>别犯蠢</h3>
+            <p>旅游增长、平台订单、新能源叙事和资本扩张会叠加成危险的乐观。租车企业首先要知道自己会死在哪里。</p>
+          </div>
+          <div class="link-row">
+            <a class="read-link" href="租车行业调研_芒格视角.md">阅读完整报告</a>
+          </div>
+        </div>
+        <div class="logic">
+          <div class="logic-card">
+            <h4>五业叠加</h4>
+            <p>汽车金融、本地运营、旅游服务、风控保险、流量平台同时发生。只懂一个维度很危险。</p>
+          </div>
+          <div class="logic-card">
+            <h4>护城河</h4>
+            <p>护城河不是车多，而是采购处置、点位网络、利用率模型、风控数据和品牌信任。</p>
+          </div>
+          <div class="logic-card">
+            <h4>激励错配</h4>
+            <p>平台要GMV，城市经理要出租率，门店要加购，总部要规模。最终风险常由车队承担。</p>
+          </div>
+          <div class="logic-card">
+            <h4>逆向清单</h4>
+            <p>不要按GMV买车，不要把OTA订单当自有用户，不要在补能维修没准备好时大铺EV。</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section id="journey">
+      <div class="section-head">
+        <h2>把租车做成旅程</h2>
+        <p>如果租车公司只优化“下单”这一屏，就会错过真正的信任形成点。用户从计划出行到押金释放，每一步都在判断品牌是否可靠。</p>
+      </div>
+      <div class="journey">
+        <div class="road-sign">
+          <h3>一条完整链路</h3>
+          <p>不是“有车可租”，而是“这趟旅行不会被交通打断”。四个关键时刻要被设计成同一套体验。</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <div class="num">01</div>
+            <div>
+              <h3>搜车：从车型到行程</h3>
+              <p>输入目的地、人数、行李、路况、是否异地还车，让系统解释为什么这台车适合，而不是让用户猜。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">02</div>
+            <div>
+              <h3>取车：从柜台到开箱</h3>
+              <p>证件、合同、保险、押金、车况照片提前完成。现场只确认身份、车况和钥匙。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">03</div>
+            <div>
+              <h3>途中：从沉默到伴随</h3>
+              <p>长线、低温、高海拔、新能源、夜间驾驶都需要主动提示。服务不该在用户开走后消失。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="num">04</div>
+            <div>
+              <h3>还车：从争议到透明</h3>
+              <p>AI验车、账单明细、押金释放时间、违章处理路径全部可见。最后十分钟决定品牌记忆。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="operator">
+      <div class="section-head">
+        <h2>经营抓手</h2>
+        <p>对业内经营者而言，真正能落地的不是“行业会增长”，而是把增长拆成可管理的资产、体验和风险。</p>
+      </div>
+      <div class="matrix">
+        <div class="matrix-card">
+          <div>
+            <h3>资产</h3>
+            <ul>
+              <li>用单车生命周期贡献替代单纯订单量。</li>
+              <li>按场景建车队，不按价格带堆车型。</li>
+              <li>把采购、残值、维修、调拨纳入同一张表。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="matrix-card">
+          <div>
+            <h3>体验</h3>
+            <ul>
+              <li>把保险、押金、剐蹭责任翻译成用户语言。</li>
+              <li>把取车和还车做成最重要的产品时刻。</li>
+              <li>让用户提前看到真实车况、空间、里程和风险。</li>
+            </ul>
+          </div>
+        </div>
+        <div class="matrix-card">
+          <div>
+            <h3>风险</h3>
+            <ul>
+              <li>不要用旺季订单推导全年车队规模。</li>
+              <li>EV先做城市与场景验证，再全国复制。</li>
+              <li>渠道合作可以要，客户关系不能全交出去。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="quote-band">
+        <p>租车行业的下一轮竞争，不是车更多，而是浪费更少、解释更清楚、交付更可信。</p>
+      </div>
+    </section>
+
+    <section id="reports">
+      <div class="section-head">
+        <h2>报告与来源</h2>
+        <p>三份报告分别约3000字，适合从业者进一步阅读。网页引用的市场规模和企业数据存在不同统计口径，已在报告中按“方向性依据”处理。</p>
+      </div>
+      <div class="source-list">
+        <a href="租车行业调研_马斯克视角.md">完整报告一：马斯克视角</a>
+        <a href="租车行业调研_乔布斯视角.md">完整报告二：乔布斯视角</a>
+        <a href="租车行业调研_芒格视角.md">完整报告三：芒格视角</a>
+        <a href="https://www.stats.gov.cn/sj/zxfb/202602/t20260228_1962662.html" target="_blank" rel="noreferrer">国家统计局：2025年统计公报</a>
+        <a href="https://xxgk.mot.gov.cn/jigou/ysfws/202606/t20260605_4206926.html" target="_blank" rel="noreferrer">交通运输部：小微型客车租赁三年行动方案</a>
+        <a href="https://www.thebusinessresearchcompany.com/report/car-rental-global-market-report" target="_blank" rel="noreferrer">The Business Research Company：Car Rental Global Market Report</a>
+        <a href="https://www.gminsights.com/industry-analysis/car-rental-market" target="_blank" rel="noreferrer">Global Market Insights：Car Rental Market</a>
+        <a href="https://www.jdpower.com/business/press-releases/2025-north-america-rental-car-satisfaction-study" target="_blank" rel="noreferrer">J.D. Power：2025北美租车满意度研究</a>
+        <a href="https://newsroom.hertz.com/press-releases/press-release-details/hertz-transformation-drives-structural-revenue-gains-and-builds-sustainable-momentum/" target="_blank" rel="noreferrer">Hertz：2025全年业绩与转型资料</a>
+        <a href="https://ir.avisbudgetgroup.com/news-releases/news-release-details/avis-budget-group-reports-fourth-quarter-and-full-year-results-1" target="_blank" rel="noreferrer">Avis Budget Group：2025全年业绩</a>
+        <a href="https://about.sixt.com/websites/sixt_cc/English/4000/reports.html" target="_blank" rel="noreferrer">SIXT：年度报告与业绩资料</a>
+        <div>封面图：Image generation 生成，无文字、无明显品牌标识，用于本报告网页视觉封面。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>生成时间：2026-06-30。研究范围覆盖全球与中国租车行业公开资料，重点服务租车、旅游、自驾、OTA、车队运营和目的地服务从业者。</p>
+  </footer>
+
+  <a class="back-top" href="#top" aria-label="返回顶部">↑</a>
+
+  <script>
+    const tabButtons = Array.from(document.querySelectorAll(".tab-btn"));
+    const panels = {
+      musk: document.querySelector("#panel-musk"),
+      jobs: document.querySelector("#panel-jobs"),
+      munger: document.querySelector("#panel-munger")
+    };
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.tab;
+        tabButtons.forEach((item) => item.classList.toggle("active", item === button));
+        Object.entries(panels).forEach(([key, panel]) => {
+          panel.classList.toggle("active", key === target);
+        });
+      });
+    });
+
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const sections = navLinks
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${visible.target.id}`);
+      });
+    }, { rootMargin: "-20% 0px -65% 0px", threshold: [0.1, 0.35, 0.6] });
+
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
